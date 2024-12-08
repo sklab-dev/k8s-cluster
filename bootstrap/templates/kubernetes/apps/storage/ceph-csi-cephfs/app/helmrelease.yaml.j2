@@ -45,16 +45,16 @@ spec:
     # Configuration for the CSI to connect to the cluster
     # Ref: https://github.com/ceph/ceph-csi/blob/devel/examples/README.md
     # Example:
-    # csiConfig:
-    #   - clusterID: "<cluster-id>"
-    #     monitors:
-    #       - "<MONValue1>"
-    #       - "<MONValue2>"
-    #     cephFS:
-    #       subvolumeGroup: "csi"
-    #       netNamespaceFilePath: "{{ .kubeletDir }}/plugins/{{ .driverName }}/net"
-    #       radosNamespace: "csi"
-    csiConfig: []
+    csiConfig:
+      - clusterID: "#{bootstrap_ceph.clusterID}#"
+        monitors:
+            #% for item in bootstrap_ceph.monitors %#
+            - "#{ item }#"
+            #% endfor %#
+        cephFS:
+          subvolumeGroup: "#{bootstrap_ceph.cephFS.subvolumeGroup}#"
+          netNamespaceFilePath: "#{bootstrap_ceph.cephFS.netNamespaceFilePath}#"
+          radosNamespace: "csi"
 
     # Configuration for the encryption KMS
     # yamllint disable-line rule:line-length
@@ -329,7 +329,7 @@ spec:
 
     storageClass:
       # Specifies whether the Storage class should be created
-      create: false
+      create: true
       name: csi-cephfs-sc
       # Annotations for the storage class
       # Example:
@@ -341,10 +341,10 @@ spec:
       # Should be unique across all Ceph clusters in use for provisioning,
       # cannot be greater than 36 bytes in length, and should remain immutable for
       # the lifetime of the StorageClass in use.
-      clusterID: <cluster-ID>
+      clusterID: "#{bootstrap_ceph.clusterID}#"
       # (required) CephFS filesystem name into which the volume shall be created
       # eg: fsName: myfs
-      fsName: myfs
+      fsName: k8s-cephfs
       # (optional) Ceph pool into which volume data shall be stored
       # pool: <cephfs-data-pool>
       # For eg:
@@ -405,8 +405,8 @@ spec:
       # Key values correspond to a user name and its key, as defined in the
       # ceph cluster. User ID should have required access to the 'pool'
       # specified in the storage class
-      adminID: <plaintext ID>
-      adminKey: <Ceph auth key corresponding to ID above>
+      adminID: ""
+      adminKey: ""
       # User credentials are required for the static provisioned PVC.
       userID: ""
       userKey: ""

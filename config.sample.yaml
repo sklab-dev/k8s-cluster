@@ -209,3 +209,23 @@ bootstrap_feature_gates:
   #     Ref: https://github.com/onedr0p/cluster-template/discussions/1510
   #   IMPORTANT: Cilium does not currently support IPv6 L2 announcements.
   dual_stack_ipv4_first: false
+
+
+# (OPTIONAL) Enable Ceph for storage
+bootstrap_ceph:
+  # (REQUIRED) Disable to manually setup and use a different DNS provider - setting this
+  #   to false will not deploy a network namespace or the workloads contained within.
+  enabled: true
+
+  clusterID: XXXXXXXX
+  monitors:
+      - 192.168.0.1
+      - 192.168.0.2
+      - 192.168.0.3
+  cephFS:
+      adminID: "client.MyCephUser"
+      adminKey: "MySecrets"
+      userID: ""
+      userKey: ""
+      subvolumeGroup: "csi"
+      netNamespaceFilePath: "{{ .kubeletDir }}/plugins/{{ .driverName }}/net"
