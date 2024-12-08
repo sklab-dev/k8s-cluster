@@ -5,13 +5,11 @@ metadata:
   name: &app ceph-csi-cephfs
   namespace: flux-system
 spec:
-  targetNamespace: network
+  targetNamespace: storage
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-dns
-  path: ./kubernetes/apps/network/ceph-csi-cephfs/app
+  path: ./kubernetes/apps/storage/ceph-csi-cephfs/app
   prune: true
   sourceRef:
     kind: GitRepository
