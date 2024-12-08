@@ -325,7 +325,7 @@ spec:
 
     # Mount the host /etc/selinux inside pods to support
     # selinux-enabled filesystems
-    selinuxMount: true
+    selinuxMount: false
 
     storageClass:
       # Specifies whether the Storage class should be created
