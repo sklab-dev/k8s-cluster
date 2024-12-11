@@ -46,12 +46,12 @@ nodes:
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "#{ item.mac_addr | lower }#"
-          {% if item.driver is defined %}
+          #% if item.driver is defined %#
           driver: #{ item.driver | lower }#
-          {% endif %}
-          {% if item.busPath is defined %}
+          #% endif %#
+          #% if item.busPath is defined %#
           busPath: "#{ item.busPath | lower }#"
-          {% endif %}
+          #% endif %#
         #% if bootstrap_vlan %#
         vlans:
           - vlanId: #{ bootstrap_vlan }#
