@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rook-ceph-mon-endpoints
+data:
+  csi-cluster-config-json: '[{"clusterID":"rook-ceph-external","monitors":["10.10.0.102:6789","10.10.0.103:6789","10.10.0.101:6789"],"cephFS":{"netNamespaceFilePath":"","subvolumeGroup":"","kernelMountOptions":"","fuseMountOptions":""},"rbd":{"netNamespaceFilePath":"","radosNamespace":""},"nfs":{"netNamespaceFilePath":""},"readAffinity":{"enabled":false,"crushLocationLabels":null},"namespace":""}]'
+  data: prox-1=10.10.0.101:6789,prox-2=10.10.0.102:6789,prox-3=10.10.0.103:6789
+  mapping: '{"node":{}}'
+  maxMonId: '2'
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: external-cluster-user-command
+data:
+  args: |+
+    [Configurations]
+    namespace = rook-ceph-external
+    rgw-pool-prefix = default
+    format = bash
+    cephfs-filesystem-name = k8s-cephfs
+    cephfs-metadata-pool-name = k8s-cephfs_metadata
+    cephfs-data-pool-name = k8s-cephfs_data
+    rbd-data-pool-name = k8s-rbd
