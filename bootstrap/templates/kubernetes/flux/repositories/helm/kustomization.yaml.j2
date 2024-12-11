@@ -12,9 +12,6 @@ resources:
   - ./prometheus-community.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  #% if bootstrap_ceph.enabled %#
-  - ./ceph-csi-cephfs.yaml
-  #% endif %#
   #% if bootstrap_cloudflare.enabled %#
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
