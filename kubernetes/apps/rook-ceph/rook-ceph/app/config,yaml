@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rook-ceph-csi-config
+data:
+  csi-cluster-config-json: >-
+    [
+      {
+        "clusterID": "rook-ceph-external",
+        "monitors": [
+          "10.10.0.101:6789",
+          "10.10.0.102:6789",
+          "10.10.0.103:6789"
+        ],
+        "cephFS": {
+          "netNamespaceFilePath": "",
+          "subvolumeGroup": "",
+          "kernelMountOptions": "",
+          "fuseMountOptions": ""
+        },
+        "rbd": {
+          "netNamespaceFilePath": "",
+          "radosNamespace": ""
+        },
+        "nfs": {
+          "netNamespaceFilePath": ""
+        },
+        "readAffinity": {
+          "enabled": false,
+          "crushLocationLabels": [
+            "kubernetes.io/hostname",
+            "topology.kubernetes.io/region",
+            "topology.kubernetes.io/zone",
+            "topology.rook.io/chassis",
+            "topology.rook.io/rack",
+            "topology.rook.io/row",
+            "topology.rook.io/pdu",
+            "topology.rook.io/pod",
+            "topology.rook.io/room",
+            "topology.rook.io/datacenter"
+          ]
+        },
+        "namespace": "rook-ceph-external"
+      }
+    ]
