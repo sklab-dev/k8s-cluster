@@ -12,7 +12,7 @@ resources:
   - ./prometheus-community.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./ceph-csi-cephfs.yaml
+  - ./rook-ceph.yaml
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
