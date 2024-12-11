@@ -18,6 +18,8 @@ bootstrap_node_network: ""
 bootstrap_node_inventory: []
     # - name: ""            # (REQUIRED) Name of the node (must match [a-z0-9-\]+)
     #   address: ""         # (REQUIRED) IP address of the node
+    #   driver: virtio_net            # (OPTIONAL) Driver for the NIC, defaults to virtio_net
+    #   busPath: "0000:00:12.0"       # (OPTIONAL) Bus path for the NIC, defaults to 0000:00:12.0
     #   controller: true    # (REQUIRED) Set to true if this is a controller node
     #   disk: ""            # (REQUIRED) Device path or serial number of the disk for this node (talosctl disks -n <ip> --insecure)
     #   mac_addr: ""        # (REQUIRED) MAC address of the NIC for this node (talosctl get links -n <ip> --insecure)
