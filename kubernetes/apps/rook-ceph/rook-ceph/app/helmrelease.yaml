@@ -23,9 +23,6 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  dependsOn:
-    - name: snapshot-controller
-      namespace: volsync-system
   values:
     # Default values for rook-ceph-operator
     # This is a YAML-formatted file.
