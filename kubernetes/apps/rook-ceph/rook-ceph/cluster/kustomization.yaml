@@ -7,3 +7,4 @@ resources:
   - ./configmap.yaml
   - ./storage_cephfs_k8s.yaml
   - ./storage_rbd_k8s.yaml
+  - ./storage_rbd_k8s_db.yaml
