@@ -9,7 +9,7 @@ spec:
   timeout: 15m
   chart:
     spec:
-      chart: cnpg
+      chart: cloudnative-pg
       version: 0.22.1
       sourceRef:
         kind: HelmRepository
