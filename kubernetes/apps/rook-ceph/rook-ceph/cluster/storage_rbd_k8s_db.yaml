@@ -18,5 +18,5 @@ parameters:
   imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
   pool: k8s-rbd
 provisioner: rook-ceph.rbd.csi.ceph.com
-reclaimPolicy: reatain
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
