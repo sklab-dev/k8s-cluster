@@ -4,7 +4,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: bitwarden-tls-certs
-  namespace: external-secrets
 spec:
   secretName: bitwarden-tls-certs
   dnsNames:
@@ -21,4 +20,4 @@ spec:
   issuerRef:
     name: bitwarden-certificate-issuer
     kind: ClusterIssuer
-    group: cert-manager.io
+    # group: cert-manager.io
