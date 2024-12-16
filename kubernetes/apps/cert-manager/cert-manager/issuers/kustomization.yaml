@@ -7,5 +7,3 @@ resources:
   - ./secret.sops.yaml
   - ./issuers.yaml
   - ./bitwarden.yaml
-  # - ./sklab-root-ca.yaml
-  # - ./issuer-bitwarden.yaml
