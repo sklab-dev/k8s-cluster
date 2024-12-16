@@ -325,7 +325,7 @@ spec:
           # https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.IssuerSpec
           issuerRef:
             kind: ClusterIssuer
-            name: bitwarden-tls-certs
+            name: bitwarden-certificate-issuer
           # -- Set the requested duration (i.e. lifetime) of the Certificate. See
           # https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec
           # One year by default.
