@@ -311,7 +311,7 @@ spec:
         # switch to using cert-manager (installed separately) to automatically issue
         # and renew the webhook certificate. This chart does not install
         # cert-manager for you, See https://cert-manager.io/docs/
-        enabled: true
+        enabled: false
         # -- Automatically add the cert-manager.io/inject-ca-from annotation to the
         # webhooks and CRDs. As long as you have the cert-manager CA Injector
         # enabled, this will automatically setup your webhook's CA to the one used
