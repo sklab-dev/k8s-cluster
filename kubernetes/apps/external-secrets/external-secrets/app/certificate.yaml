@@ -9,6 +9,7 @@ spec:
   dnsNames:
     - bitwarden-sdk-server.external-secrets.svc.cluster.local
     - external-secrets-bitwarden-sdk-server.external-secrets.svc.cluster.local
+    - *.external-secrets.svc.cluster.local
     - localhost
   ipAddresses:
     - 127.0.0.1
@@ -18,6 +19,6 @@ spec:
     encoding: PKCS8
     size: 2048
   issuerRef:
-    name: bitwarden-certificate-issuer
-    kind: ClusterIssuer
+    name: external-secrets-selfsigned-issuer
+    kind: Issuer
     # group: cert-manager.io
