@@ -6,4 +6,4 @@ resources:
   - ./externalsecret.yaml
   - ./secret.sops.yaml
   - ./issuers.yaml
-  - ./issuer-bitwarden.yaml
+  # - ./issuer-bitwarden.yaml
