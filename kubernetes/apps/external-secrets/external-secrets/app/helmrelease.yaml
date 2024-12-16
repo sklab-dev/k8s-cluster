@@ -39,7 +39,7 @@ spec:
     replicaCount: 2
 
     bitwarden-sdk-server:
-      enabled: false
+      enabled: true
 
     # -- Specifies the amount of historic ReplicaSets k8s should keep (see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#clean-up-policy)
     revisionHistoryLimit: 10
