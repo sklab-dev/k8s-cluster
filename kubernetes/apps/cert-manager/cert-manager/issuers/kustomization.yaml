@@ -6,4 +6,5 @@ resources:
   - ./externalsecret.yaml
   - ./secret.sops.yaml
   - ./issuers.yaml
+  - ./sklab-root-ca.yaml
   # - ./issuer-bitwarden.yaml
