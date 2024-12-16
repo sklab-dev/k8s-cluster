@@ -20,20 +20,20 @@ spec:
   isCA: true
   # secretName: bitwarden-tls-certs
   secretName: bitwarden-bootstrap-tls-certs
-  # subject:
-  #   organizations:
-  #     - external-secrets.io
-  # dnsNames:
-  #   - external-secrets-bitwarden-sdk-server.external-secrets.svc.cluster.local
-  #   - bitwarden-sdk-server.external-secrets.svc.cluster.local
-  #   - localhost
-  # ipAddresses:
-  #   - 127.0.0.1
-  #   - ::1
-  # privateKey:
-  #   algorithm: RSA
-  #   encoding: PKCS8
-  #   size: 2048
+  subject:
+    organizations:
+      - external-secrets.io
+  dnsNames:
+    - external-secrets-bitwarden-sdk-server.external-secrets.svc.cluster.local
+    - bitwarden-sdk-server.external-secrets.svc.cluster.local
+    - localhost
+  ipAddresses:
+    - 127.0.0.1
+    - ::1
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
   issuerRef:
     name: bitwarden-bootstrap-issuer
     kind: ClusterIssuer
@@ -64,10 +64,10 @@ spec:
   ipAddresses:
     - 127.0.0.1
     - ::1
-  # privateKey:
-  #   algorithm: RSA
-  #   encoding: PKCS8
-  #   size: 2048
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
   issuerRef:
     name: bitwarden-certificate-issuer
     kind: ClusterIssuer
