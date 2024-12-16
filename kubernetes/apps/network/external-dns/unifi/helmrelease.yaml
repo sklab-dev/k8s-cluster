@@ -64,7 +64,7 @@ spec:
     policy: sync
     sources: ["ingress", "service"]
     txtOwnerId: main
-    txtPrefix: k8s.main.
+    txtPrefix: k8s.
     domainFilters: ["sklab.dev"]
     serviceMonitor:
       enabled: true
