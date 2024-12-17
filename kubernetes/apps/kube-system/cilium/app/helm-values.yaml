@@ -1,7 +1,10 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmvaluesfile_v2.json
 autoDirectNodeRoutes: true
 bpf:
   masquerade: true
+  preallocateMaps: true
+  tproxy: true
 cgroup:
   automount:
     enabled: false
