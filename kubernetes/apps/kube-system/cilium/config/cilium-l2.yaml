@@ -23,4 +23,6 @@ metadata:
 spec:
   allowFirstLastIPs: "Yes"
   blocks:
-    - cidr: "10.10.0.0/24"
+    #- cidr: "10.10.0.0/24"
+    - start: 10.10.0.90
+      stop: 10.10.0.110
