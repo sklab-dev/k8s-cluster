@@ -1,10 +1,10 @@
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmvaluesfile_v2.json
 autoDirectNodeRoutes: true
-bpf:
-  masquerade: true
-  preallocateMaps: true
-  tproxy: true
+# bpf:
+#   masquerade: true
+#   preallocateMaps: true
+#   tproxy: true
 cgroup:
   automount:
     enabled: false
@@ -25,8 +25,8 @@ hubble:
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.69.0.0/16"
-k8sServiceHost: ${API_SERVER_IP}
-k8sServicePort: ${API_SERVER_PORT}
+k8sServiceHost: 127.0.0.1
+k8sServicePort: 7445
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 l2announcements:
