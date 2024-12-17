@@ -25,21 +25,21 @@ hubble:
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.69.0.0/16"
-k8sServiceHost: 127.0.0.1
+k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
-l2announcements:
-  enabled: true
-loadBalancer:
-  algorithm: maglev
-  mode: "dsr"
-localRedirectPolicy: true
+# l2announcements:
+#   enabled: true
+# loadBalancer:
+#   algorithm: maglev
+#   mode: "dsr"
+# localRedirectPolicy: true
 operator:
   replicas: 1
   rollOutPods: true
 rollOutCiliumPods: true
-routingMode: native
+# routingMode: native
 securityContext:
   capabilities:
     ciliumAgent:
@@ -58,6 +58,6 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
-socketLB:
-  enabled: true
-  hostNamespaceOnly: true
+# socketLB:
+#   enabled: true
+#   hostNamespaceOnly: true
