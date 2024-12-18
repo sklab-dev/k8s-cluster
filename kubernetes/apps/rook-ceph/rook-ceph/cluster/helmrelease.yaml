@@ -23,6 +23,11 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: rook-ceph-operator
+      namespace: rook-ceph
+    - name: snapshot-controller
+      namespace: volsync-system
   values:
     # All values below are taken from the CephCluster CRD
     # -- Cluster configuration.
