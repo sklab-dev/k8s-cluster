@@ -45,8 +45,8 @@ spec:
                 volumes:
                   - name: repository
                     nfs:
-                      server: expanse.internal
-                      path: /mnt/eros/Volsync
+                      server: "nas.${SECRET_DOMAIN}"
+                      path: /mnt/storage/k8s.sklab.dev/volsync
     - name: mutate-volsync-dst-movers
       match:
         any:
@@ -70,5 +70,5 @@ spec:
                 volumes:
                   - name: repository
                     nfs:
-                      server: expanse.internal
-                      path: /mnt/eros/Volsync
+                      server: "nas.${SECRET_DOMAIN}"
+                      path: /mnt/storage/k8s.sklab.dev/volsync
