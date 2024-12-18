@@ -25,3 +25,4 @@ resources:
   - ./spegel.yaml
   - ./stakater.yaml
   - ./piraeus.yaml
+  - ./kyverno.yaml
