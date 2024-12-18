@@ -19,3 +19,5 @@ parameters:
 provisioner: rook-ceph.rbd.csi.ceph.com
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+mountOptions:
+  - discard
