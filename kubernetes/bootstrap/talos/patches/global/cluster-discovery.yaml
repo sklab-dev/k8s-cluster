@@ -4,4 +4,4 @@ cluster:
       kubernetes:
         disabled: false
       service:
-        disabled: true
+        disabled: false
