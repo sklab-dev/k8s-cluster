@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -26,6 +27,7 @@ spec:
   values:
     fullnameOverride: ingress-nginx-external
     controller:
+      replicaCount: 2
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: &hostname "external.${SECRET_DOMAIN}"
@@ -68,6 +70,7 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "network/${SECRET_DOMAIN/./-}-production-tls"
+        publish-status-address: *hostname
       resources:
         requests:
           cpu: 100m
