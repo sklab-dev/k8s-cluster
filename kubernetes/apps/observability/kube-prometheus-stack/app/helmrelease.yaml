@@ -27,7 +27,7 @@ spec:
   dependsOn:
     - name: prometheus-operator-crds
       namespace: observability
-    - name: rook-ceph-cluster
+    - name: rook-ceph-external
       namespace: rook-ceph
   values:
     crds:
