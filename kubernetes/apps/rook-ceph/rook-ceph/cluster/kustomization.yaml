@@ -5,6 +5,5 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./configmap.yaml
-  - ./storage_cephfs_k8s.yaml
-  - ./storage_rbd_k8s.yaml
-  - ./storage_rbd_k8s_db.yaml
+  - ./storage_ceph-filesystem.yaml
+  - ./storage_ceph-block.yaml
