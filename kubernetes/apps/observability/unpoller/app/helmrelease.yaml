@@ -36,6 +36,7 @@ spec:
             env:
               TZ: America/New_York
               UP_PROMETHEUS_HTTP_LISTEN: 0.0.0.0:80
+              UP_UNIFI_DEFAULT_ROLE: home-ops
               UP_INFLUXDB_DISABLE: true
             envFrom:
               - secretRef:
