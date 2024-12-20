@@ -68,7 +68,7 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "network/${SECRET_DOMAIN/./-}-production-tls"
-        publish-status-address: *hostname
+        # publish-status-address: *hostname
       resources:
         requests:
           cpu: 100m
