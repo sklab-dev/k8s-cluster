@@ -9,3 +9,5 @@ resources:
   - ./prometheus-operator-crds/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./promtail/ks.yaml
+#  - ./smartctl-exporter/ks.yaml Todo enable when moving to real hardware
+#  - ./snmp-exporter/ks.yaml Todo enable 
