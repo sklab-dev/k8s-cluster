@@ -13,7 +13,7 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
   csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
   csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
-  imageFeatures: layering
+  imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
   imageFormat: '2'
   pool: k8s-rbd
 provisioner: rook-ceph.rbd.csi.ceph.com
