@@ -34,3 +34,4 @@ spec:
       podMonitorEnabled: false
       grafanaDashboard:
         create: true
+        
