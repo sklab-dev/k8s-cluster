@@ -32,7 +32,7 @@ spec:
       GF_EXPLORE_ENABLED: true
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
       GF_SECURITY_ANGULAR_SUPPORT_ENABLED: true
-      GF_SERVER_ROOT_URL: https://grafana.sklab.dev
+      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
     grafana.ini:
       analytics:
         check_for_updates: false
@@ -41,7 +41,7 @@ spec:
       auth.anonymous:
         enabled: true
         org_id: 1
-        org_name: sklab.dev
+        org_name: "${SECRET_DOMAIN}"
         org_role: Viewer
       news:
         news_feed_enabled: false
