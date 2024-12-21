@@ -23,7 +23,7 @@ spec:
     # format: prometheus | prometheus_all_hosts
     # You can use `prometheus_all_hosts` if you want Prometheus to set the `instance` to your hostname instead of IP 
     format: [ prometheus ]
-    prefix: [ truenas]
+    prefix: [ netdata ]
   relabelings:
     - action: replace
       targetLabel: job
