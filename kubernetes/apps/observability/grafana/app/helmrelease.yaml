@@ -264,7 +264,7 @@ spec:
     ingress:
       enabled: true
       ingressClassName: internal
-      hosts: ["grafana.sklab.dev"]
+      hosts: ["grafana.${SECRET_DOMAIN}"]
     persistence:
       enabled: false
     testFramework:
