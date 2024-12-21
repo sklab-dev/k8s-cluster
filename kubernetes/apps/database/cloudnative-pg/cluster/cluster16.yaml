@@ -48,9 +48,15 @@ spec:
           key: aws-secret-access-key
   # Note: previousCluster needs to be set to the name of the previous
   # cluster when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v0
   bootstrap:
-    recovery:
-      source: &previousCluster postgres16-v0
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: cloudnative-pg-secret
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
     - name: *previousCluster
