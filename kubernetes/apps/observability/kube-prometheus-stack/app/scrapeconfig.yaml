@@ -10,7 +10,7 @@ spec:
     insecureSkipVerify: true
   staticConfigs:
     - targets:
-        - "nas.sklab.dev"
+        - "nas.${SECRET_DOMAIN}"
   metricsPath: /netdata/api/v1/allmetrics
   params:
     # format: prometheus | prometheus_all_hosts
