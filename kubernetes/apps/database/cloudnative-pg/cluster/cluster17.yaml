@@ -74,7 +74,7 @@ spec:
   bootstrap:
     initdb:
       database: app
-      owner: app
+      owner: pg-app-db-user
       secret:
         name: cloudnative-pg-secret
 
