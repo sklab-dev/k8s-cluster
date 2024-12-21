@@ -3,58 +3,20 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name: &name node-exporter
+  name: &name truenas-scale
 spec:
+  scheme: HTTPS
+  tlsConfig:
+    insecureSkipVerify: true
   staticConfigs:
     - targets:
-        - expanse.internal:9100
-        - pikvm.internal:9100
-  metricsPath: /metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: &name smartctl-exporter
-spec:
-  staticConfigs:
-    - targets:
-        - expanse.internal:9633
-  metricsPath: /metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: &name pikvm
-spec:
-  staticConfigs:
-    - targets:
-        - pikvm.internal
-  metricsPath: /api/export/prometheus/metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: &name zigbee-controller
-spec:
-  staticConfigs:
-    - targets:
-        - zigbee-controller.internal
-  metricsPath: /metrics
+        - "nas.sklab.dev"
+  metricsPath: /netdata/api/v1/allmetrics
+  params:
+    # format: prometheus | prometheus_all_hosts
+    # You can use `prometheus_all_hosts` if you want Prometheus to set the `instance` to your hostname instead of IP 
+    format: [ prometheus ]
+    prefix: [ truenas]
   relabelings:
     - action: replace
       targetLabel: job
