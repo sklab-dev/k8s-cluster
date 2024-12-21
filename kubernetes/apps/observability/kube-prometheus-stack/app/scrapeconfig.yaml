@@ -11,6 +11,13 @@ spec:
   staticConfigs:
     - targets:
         - "nas.${SECRET_DOMAIN}"
+  basicAuth:
+    username:
+        name: &secret truenas-netdata-secret
+        key: TRUENAS_NETDATA_USERNAME
+    password:
+        name: &secret truenas-netdata-secret
+        key: TRUENAS_NETDATA_PASSWORD
   metricsPath: /netdata/api/v1/allmetrics
   params:
     # format: prometheus | prometheus_all_hosts
