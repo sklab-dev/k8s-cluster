@@ -35,7 +35,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://cloudnative-pg/
-      endpointURL: {{ (lookup "v1" "Secret" .Release.Namespace "cloudnative-pg-secret").data.aws-secret-endpoint | b64dec | quote }}
+      endpointURL: https://604128bd389364580b3208006c949072.r2.cloudflarestorage.com
       # Note: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
       serverName: &currentCluster postgres16-v8
