@@ -12,5 +12,6 @@ resources:
   - ./promtail/ks.yaml
   - ./unpoller/ks.yaml
   - ./kromgo/ks.yaml
+  - ./gatus/ks.yaml
 #  - ./smartctl-exporter/ks.yaml Todo enable when moving to real hardware
 #  - ./snmp-exporter/ks.yaml Todo enable 
