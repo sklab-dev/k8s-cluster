@@ -74,9 +74,9 @@ spec:
   bootstrap:
     initdb:
       database: app
-      owner: pg-app-db-user
+      owner: app
       secret:
-        name: cloudnative-pg-secret
+        name: cloudnative-pg-cluster-secret
 
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   # externalClusters:
