@@ -71,12 +71,12 @@ spec:
 
   # Intialise Database
   # https://cloudnative-pg.io/documentation/1.18/api_reference/#BootstrapConfiguration
-  # bootstrap:
-  #   initdb:
-  #     database: app
-  #     owner: app
-  #     secret:
-  #       name: cloudnative-pg-cluster-secret
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: cloudnative-pg-cluster-secret
 
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   # externalClusters:
