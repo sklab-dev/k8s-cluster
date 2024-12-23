@@ -24,6 +24,9 @@ includes:
   kubernetes: .taskfiles/kubernetes
   talos: .taskfiles/talos
   workstation: .taskfiles/workstation
+  dashboards: 
+    taskfile: .taskfiles/dashboards
+    optional: true
   user:
     taskfile: .taskfiles/User
     optional: true

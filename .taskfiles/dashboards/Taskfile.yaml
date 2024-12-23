@@ -1,0 +1,33 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+tasks:
+
+  unpoller:
+    desc: Download the UniFi-Poller Grafana dashboards
+    cmds:
+      - task: download-unifi-insights
+      - task: download-unifi-network-sites
+      - task: download-unifi-uap
+      - task: download-unifi-usw
+
+  download-unifi-insights:
+    desc: Download the UniFi-Poller Client Insights - Prometheus dashboard
+    cmds:
+      - curl -sSfL https://grafana.com/api/dashboards/11315/revisions/9/download > /workspaces/k8s.sklab.dev/kubernetes/apps/observability/unpoller/app/dashboard/unify-insights.json
+
+  download-unifi-network-sites:
+    desc: Download the UniFi-Poller Network Sites - Prometheus dashboard
+    cmds:
+      - curl -sSfL https://grafana.com/api/dashboards/11311/revisions/5/download > /workspaces/k8s.sklab.dev/kubernetes/apps/observability/unpoller/app/dashboard/unify-network-sites.json
+  
+  download-unifi-uap:
+    desc: Download the UniFi-Poller UAP Insights - Prometheus dashboard
+    cmds:
+      - curl -sSfL https://grafana.com/api/dashboards/11314/revisions/10/download > /workspaces/k8s.sklab.dev/kubernetes/apps/observability/unpoller/app/dashboard/unify-uap.json
+
+  download-unifi-usw:
+    desc: Download the UniFi-Poller USW Insights - Prometheus dashboard
+    cmds:
+      - curl -sSfL https://grafana.com/api/dashboards/11312/revisions/9/download > /workspaces/k8s.sklab.dev/kubernetes/apps/observability/unpoller/app/dashboard/unify-usw.json
