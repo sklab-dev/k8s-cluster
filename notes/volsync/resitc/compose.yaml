@@ -8,7 +8,7 @@ services:
       com.example.version: "0.17.3"
     environment:
       RESTIC_REPOSITORY: /repository
-      RESTIC_PASSWORD: "CFMatCR2Sc2rAL4Vt36nA7SVOivpiuAYTpZ50orJdKoTRA5"
+      RESTIC_PASSWORD: ""
       RESTIC_PROGRESS_FPS: 2
       RESTIC_COMPRESSION: auto
     ports:
