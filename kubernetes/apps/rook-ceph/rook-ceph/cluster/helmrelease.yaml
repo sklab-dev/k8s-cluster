@@ -46,12 +46,12 @@ spec:
     # @default -- See [below](#ceph-block-pools)
     cephBlockPools: {}
     
-    # Volume SnapShot Class
-    cephBlockPoolsVolumeSnapshotClass:
-      enabled: true
-      name: csi-ceph-blockpool
-      isDefault: false
-      deletionPolicy: Delete
+    # # Volume SnapShot Class
+    # cephBlockPoolsVolumeSnapshotClass:
+    #   enabled: true
+    #   name: csi-ceph-blockpool
+    #   isDefault: false
+    #   deletionPolicy: Delete
 
     # -- A list of CephFileSystem configurations to deploy
     # @default -- See [below](#ceph-file-systems)

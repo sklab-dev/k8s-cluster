@@ -7,3 +7,4 @@ resources:
   - ./configmap.yaml
   - ./storage_ceph-filesystem.yaml
   - ./storage_ceph-block.yaml
+  - ./snapshot.yaml
