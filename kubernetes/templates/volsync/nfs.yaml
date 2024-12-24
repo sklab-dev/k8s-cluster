@@ -13,7 +13,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: "/repository/${APP}"
+        RESTIC_REPOSITORY: "{{ .restic_repository }}/${APP}"
         RESTIC_PASSWORD: "{{ .resitc_password }}"
   dataFrom:
     - extract:
