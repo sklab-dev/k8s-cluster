@@ -14,7 +14,7 @@ spec:
       engineVersion: v2
       data:
         RESTIC_REPOSITORY: "/repository/${APP}"
-        RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
+        RESTIC_PASSWORD: "{{ .resitc_password }}"
   dataFrom:
     - extract:
         key: volsync-template
