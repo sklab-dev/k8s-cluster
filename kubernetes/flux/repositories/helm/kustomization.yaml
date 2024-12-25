@@ -32,3 +32,4 @@ resources:
   - ./stakater.yaml
   - ./stevehipwell.yaml
   - ./authentik.yaml
+  - ./dragonfly-operator.yaml

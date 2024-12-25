@@ -18,9 +18,9 @@ spec:
     global:
       deploymentAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
-      env:
-        - name: AUTHENTIK_SESSION_STORAGE
-          value: db
+      env: &env
+        AUTHENTIK_SESSION_STORAGE : db
+        AUTHENTIK_REDIS__HOST: dragonfly.database.svc.cluster.local
       envFrom:
         - secretRef:
             name: *secret
@@ -66,12 +66,12 @@ spec:
           memory: 1200Mi
     authentik:
       log_level: debug
-      # redis:
-      #   host: dragonfly.database.svc.cluster.local
+      redis:
+        host: dragonfly.database.svc.cluster.local
       error_reporting:
         enabled: false
     redis:
-      enabled: true 
+      enabled: false 
       storageClassName: ceph-block
 
     prometheus:
