@@ -47,8 +47,10 @@ spec:
         ingressClassName: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts: ["auth.${SECRET_DOMAIN}"]
-        paths: [/]
+        hosts: 
+        - "auth.${SECRET_DOMAIN}"
+        paths: 
+          - /
 
     worker:
       replicas: 1
