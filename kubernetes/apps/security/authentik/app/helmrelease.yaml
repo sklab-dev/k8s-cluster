@@ -18,7 +18,7 @@ spec:
     global:
       deploymentAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
-      env: &env
+      env:
         AUTHENTIK_SESSION_STORAGE : db
         AUTHENTIK_REDIS__HOST: dragonfly.database.svc.cluster.local
       envFrom:
