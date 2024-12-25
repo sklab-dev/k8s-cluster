@@ -13,7 +13,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: "{{ .endpoint_url }}/{{ .restic_repository_template }}/${APP}"
+        RESTIC_REPOSITORY: "s3:{{ .endpoint_url }}/{{ .restic_repository_template }}/${APP}"
         RESTIC_PASSWORD: "{{ .resitc_password }}"
         AWS_ACCESS_KEY_ID: "{{ .access_key_id }}"
         AWS_SECRET_ACCESS_KEY: "{{ .secret_access_key }}"
