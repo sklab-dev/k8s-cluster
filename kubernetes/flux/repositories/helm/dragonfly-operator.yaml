@@ -8,3 +8,5 @@ metadata:
 spec:
   url: oci://ghcr.io/dragonflydb/dragonfly-operator/helm
   type: oci
+
+  
