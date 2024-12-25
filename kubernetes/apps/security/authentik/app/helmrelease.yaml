@@ -43,18 +43,17 @@ spec:
         serviceMonitor:
           enabled: true
       ingress:
-        main:
-          enabled: true
-          ingressClassName: external
-          annotations:
-            external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          hosts:
-            - host: "auth.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  service:
-                    identifier: authentik
-                    port: http
+        enabled: true
+        ingressClassName: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: "auth.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: authentik
+                  port: http
 
     worker:
       replicas: 1
