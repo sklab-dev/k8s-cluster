@@ -72,6 +72,8 @@ spec:
         enabled: false
     redis:
       enabled: true 
+      storageClassName: ceph-block
+
     prometheus:
       rules:
         enabled: true
