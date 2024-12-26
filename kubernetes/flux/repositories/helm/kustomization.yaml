@@ -33,3 +33,4 @@ resources:
   - ./stevehipwell.yaml
   - ./authentik.yaml
   - ./dragonfly-operator.yaml
+  - ./cloudnative-pg-dashboards.yaml

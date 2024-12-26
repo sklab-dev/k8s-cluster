@@ -9,7 +9,7 @@ data:
   config.yaml: |
     endpoints:
       - name: postgres
-        group: infrastructure
+        group: Database
         url: tcp://postgres17-rw.database.svc.cluster.local:5432
         interval: 1m
         ui:

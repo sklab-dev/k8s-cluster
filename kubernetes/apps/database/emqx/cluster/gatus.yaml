@@ -9,7 +9,7 @@ data:
   config.yaml: |
     endpoints:
       - name: emqx
-        group: Infrastructure
+        group: Database
         url: tcp://emqx-listeners.database.svc.cluster.local:1883
         interval: 1m
         ui:
