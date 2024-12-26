@@ -24,6 +24,11 @@ do
     curl -fsSL "https://i.jpillora.com/${app}" | bash
 done
 
+# curl -sSfL \
+#   https://github.com/cloudnative-pg/cloudnative-pg/raw/main/hack/install-cnpg-plugin.sh | \
+#   sudo sh -s -- -b /usr/local/bin
+# curl -fsSL https://i.jpillora.com/cloudnative-pg/cloudnative-pg!!?as=kubectl-cnpg&type=script | bash
+
 # Create the fish configuration directory
 mkdir -p /home/vscode/.config/fish/{completions,conf.d}
 
