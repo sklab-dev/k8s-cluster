@@ -63,5 +63,3 @@ spec:
         serviceMonitor:
           enabled: true
 
-    worker:
-
