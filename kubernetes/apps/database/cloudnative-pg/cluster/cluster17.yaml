@@ -55,6 +55,7 @@ spec:
   monitoring:
     enablePodMonitor: true
     # https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
+    # Need to change in Grafana dashboards cluster to cnpg_cluster in the Variable Cluster
     podMonitorMetricRelabelings:
       - { sourceLabels: [ "cluster" ], targetLabel: cnpg_cluster, action: replace }
       - { regex: cluster, action: labeldrop }
