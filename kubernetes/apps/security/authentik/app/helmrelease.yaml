@@ -63,26 +63,12 @@ spec:
                 service:
                   identifier: app
                   port: http
-      resources:
-        requests:
-          cpu: 50m
-          memory: 500Mi
-        limits:
-          memory: 800Mi
       metrics:
         enabled: true
         serviceMonitor:
           enabled: true
 
-
-
     worker:
       autoscaling:
         enabled: true
         minReplicas: 1
-      resources:
-        requests:
-          cpu: 50m
-          memory: 500Mi
-        limits:
-          memory: 1200Mi
