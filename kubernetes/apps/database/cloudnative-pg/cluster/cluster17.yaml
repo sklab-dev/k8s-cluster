@@ -29,6 +29,14 @@ spec:
       max_connections: "250"
       shared_buffers: 128MB
   
+  # Pod affinity Rules
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
+    nodeSelector:
+      kubernetes.io/os: linux
+
   # Pod resource boundaries
   resources:
     requests:
@@ -40,6 +48,10 @@ spec:
   # Prometheus Exporter
   monitoring:
     enablePodMonitor: true
+    # https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
+    podMonitorMetricRelabelings:
+      - { sourceLabels: [ "cluster" ], targetLabel: cnpg_cluster, action: replace }
+      - { regex: cluster, action: labeldrop }
 
   # Backup Configuration  
   backup:
@@ -49,12 +61,12 @@ spec:
         compression: bzip2
       wal:
         compression: bzip2
-        maxParallel: 8
+        maxParallel: 4
       destinationPath: s3://cloudnative-pg/
       endpointURL: https://604128bd389364580b3208006c949072.r2.cloudflarestorage.com
       # Note: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster postgres17-v1
+      serverName: &currentCluster postgres17-v2
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
@@ -65,22 +77,14 @@ spec:
 
   # Note: previousCluster needs to be set to the name of the previous
   # cluster when recovering from an existing cnpg cluster
-  # bootstrap:
-  #   recovery:
-  #     source: &previousCluster postgres17-v0
+  bootstrap:
+    recovery:
+      source: &previousCluster postgres17-v1
 
-  # Intialise Database
-  # https://cloudnative-pg.io/documentation/1.18/api_reference/#BootstrapConfiguration
-  # bootstrap:
-  #   initdb:
-  #     database: app
-  #     owner: app
-  #     secret:
-  #       name: cloudnative-pg-cluster-secret
 
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
-  # externalClusters:
-  #   - name: *previousCluster
-  #     barmanObjectStore:
-  #       <<: *barmanObjectStore
-  #       serverName: *previousCluster
+  externalClusters:
+    - name: *previousCluster
+      barmanObjectStore:
+        <<: *barmanObjectStore
+        serverName: *previousCluster
