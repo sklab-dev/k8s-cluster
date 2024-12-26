@@ -1,0 +1,40 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+# API version of the Kustomization resource
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+# Kind of the resource
+kind: Kustomization
+metadata:
+  # Name of the Kustomization resource
+  name: &app external-secrets
+  # Namespace where the Kustomization resource is created
+  namespace: flux-system
+spec:
+  # Target namespace where the resources will be applied
+  targetNamespace: external-secrets
+
+  commonMetadata:
+    labels:
+      # Label to identify the application
+      app.kubernetes.io/name: *app
+  
+  dependsOn:
+    - name: external-secrets-stores
+
+  # Path to the directory containing the Kubernetes manifests
+  path: ./kubernetes/apps/external-secrets/external-secrets/app
+  # Enable pruning of resources that are no longer defined in the source
+  prune: true
+  sourceRef:
+    # Kind of the source reference
+    kind: GitRepository
+    # Name of the GitRepository resource
+    name: home-kubernetes
+  # Wait for all resources to be reconciled before marking the Kustomization as ready
+  wait: true
+  # Interval at which the Kustomization will be reconciled
+  interval: 30m
+  # Timeout for the Kustomization reconciliation
+  timeout: 5m
+
+---

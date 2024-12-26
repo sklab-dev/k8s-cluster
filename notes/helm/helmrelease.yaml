@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  # The name field specifies the name of the HelmRelease resource. In this case, the name is app
+  name: &app "${REDIS_APP_NAME}-redis"
+  # The namespace field specifies the namespace where the HelmRelease resource is located. In this case, the HelmRelease resource is located in the redis-app namespace
+  namespace: "${REDIS_APP_NS}"
+spec:
+  # The interval field specifies the interval at which the HelmRelease controller will check for updates to the Helm chart. In this case, the controller will check for updates every 15 minutes.
+  interval: 15m
+  # The chart field specifies the Helm chart to be deployed. In this case, the chart is named app-template
+  chart:
+    spec:
+      # Helm chart to be deployed. In this case, the chart is named app-template
+      chart: app-template
+      # This field indicates the version of the Helm chart to be used. Here, version 3.6.0 of the app-template chart will be deployed.
+      version: 3.6.0
+      # The sourceRef field provides a reference to the source of the Helm chart
+      sourceRef:
+        # This field specifies the name of the Helm repository where the chart is located. The repository is named bjw-s
+        name: bjw-s
+        # This field specifies the kind of the Helm repository. In this case, the kind is HelmRepository
+        kind: HelmRepository
+        # namespace field specifies the namespace where the Helm repository is located. In this case, the Helm repository is located in the flux-system namespace
+        namespace: flux-system
+  # This field specifies the maximum number of release revisions that Helm should keep for this HelmRelease. By setting maxHistory to 3
+  maxHistory: 3
+  # This section defines the behavior during the installation of the Helm chart
+  install:
+    # This field indicates that Helm should create the namespace specified in the HelmRelease if it does not already exist. 
+    createNamespace: true
+    # This subsection specifies the remediation strategy if the installation fails
+    remediation:
+      # This field specifies the number of retries for the remediation strategy. In this case, the remediation strategy will be retried 3 times
+      retries: 3
+  # This section defines the behavior during the upgrade of the Helm chart
+  upgrade:
+    # This field specifies that the HelmRelease should wait for the Helm chart to be deployed before cleaning up on failure
+    cleanupOnFail: true
+    # This subsection specifies the remediation strategy if the upgrade fails
+    remediation:
+      # This field specifies the number of retries for the remediation strategy. In this case, the remediation strategy will be retried 3 times
+      retries: 3
+  # This section defines the behavior during the uninstallation of the Helm chart
+  uninstall:
+    # This field specifies that the HelmRelease should wait for the Helm chart to be deleted before cleaning up on failure
+    keepHistory: false
+  # This section defines the values to be passed to the Helm chart during installation
+  values: {}
