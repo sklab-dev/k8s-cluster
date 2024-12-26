@@ -21,14 +21,48 @@ spec:
       envFrom:
         - secretRef:
             name: *secret
+
+    authentik:
+      log_level: info   
+      error_reporting:
+        enabled: false
+
+    postgres:
+      enabled: false
+
+    prometheus:
+      rules:
+        enabled: true
+
+    redis:
+      enabled: false
+
     server:
-      replicas: 1
+      podAnnotations:
+        secret.reloader.stakater.com/reload:
+      autoscaling:
+        enabled: true
+        minReplicas: 1
       initContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:16.6
           envFrom:
             - secretRef:
                 name: *secret
+      ingress:
+        enabled: true
+        ingressClassName: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+        hosts:
+          - host: "auth.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
       resources:
         requests:
           cpu: 50m
@@ -39,32 +73,16 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
-      ingress:
-        enabled: true
-        ingressClassName: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts: ["auth.${SECRET_DOMAIN}"]
-        paths: [/]
+
+
 
     worker:
-      replicas: 1
+      autoscaling:
+        enabled: true
+        minReplicas: 1
       resources:
         requests:
           cpu: 50m
           memory: 500Mi
         limits:
           memory: 1200Mi
-    authentik:
-      log_level: debug
-      redis:
-        host: dragonfly.database.svc.cluster.local
-      error_reporting:
-        enabled: false
-    redis:
-      enabled: false 
-      storageClassName: ceph-block
-
-    prometheus:
-      rules:
-        enabled: true
