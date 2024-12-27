@@ -53,6 +53,9 @@ spec:
         ingressClassName: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
+          nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
+          nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
         hosts:
           - "auth.${SECRET_DOMAIN}"
             # paths:
