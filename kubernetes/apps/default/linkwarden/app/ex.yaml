@@ -1,0 +1,58 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: linkwarden
+  namespace: default
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secretsmanager
+  target:
+    name: linkwarden-secret
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        # App
+        NEXTAUTH_SECRET: "{{ .nextauth_secret }}"
+        DATABASE_URL: "postgres://{{ .postgres_user }}:{{ .postgres_password }}@postgres17-rw.database.svc.cluster.local:5432/{{ .postgres_dbname }}"
+        AUTHENTIK_CLIENT_ID: "{{ .authentik_client_id }}"
+        AUTHENTIK_ISSUER: "{{ .authentik_client_issuer }}"
+        AUTHENTIK_CLIENT_SECRET: "{{ .authentik_client_secret }}"
+  dataFrom:
+    - extract:
+        key: linkwarden
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: linkwarden-init
+  namespace: default
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secretsmanager
+  target:
+    name: linkwarden-init-secret
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        # Postgres Init
+        INIT_POSTGRES_HOST: postgres17-rw.database.svc.cluster.local
+        INIT_POSTGRES_DBNAME: "{{ .postgres_dbname }}"
+        INIT_POSTGRES_USER: "{{ .postgres_user }}"
+        INIT_POSTGRES_PASS: "{{ .postgres_password }}"
+        INIT_POSTGRES_SUPER_PASS: "{{ .postgres_super_password }}"
+
+  dataFrom:
+    - extract:
+        key: linkwarden
+    - extract:
+        key: cloudnative-pg
+
