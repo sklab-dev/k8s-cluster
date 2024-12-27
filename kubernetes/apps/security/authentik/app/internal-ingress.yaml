@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    meta.helm.sh/release-name: authentik
+    meta.helm.sh/release-namespace: security
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/instance: authentik
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: authentik
+    app.kubernetes.io/part-of: authentik
+  name: authentik-int
+spec:
+  ingressClassName: internal
+  rules:
+    - host: auth.${SECRET_DOMAIN}
+      http:
+        paths:
+          - backend:
+              service:
+                name: authentik-server
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
