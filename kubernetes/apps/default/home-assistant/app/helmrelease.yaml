@@ -89,8 +89,8 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
-          nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
-          nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
         hosts:
           - host: "hass.${SECRET_DOMAIN}"
             paths:
@@ -103,8 +103,8 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
           # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
-          nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
-          nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
         hosts:
           - host: "hass-code.${SECRET_DOMAIN}"
             paths:
