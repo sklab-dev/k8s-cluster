@@ -3,7 +3,7 @@
   "name": "Flux Cluster Template",
   "image": "ghcr.io/onedr0p/cluster-template/devcontainer:latest",
   "containerUser": "vscode",
-  "initializeCommand": "docker pull ghcr.io/onedr0p/cluster-template/devcontainer:latest",
+  "initializeCommand": "podman pull ghcr.io/onedr0p/cluster-template/devcontainer:latest",
   "postCreateCommand": {
     "setup": "bash ${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh"
   },
