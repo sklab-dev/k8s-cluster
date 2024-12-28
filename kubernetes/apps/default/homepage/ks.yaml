@@ -3,10 +3,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: default-homepage
+  name: homepage
   namespace: flux-system
 spec:
-  path: ./kubernetes/talos/apps/default/homepage/app
+  path: ./kubernetes/apps/default/homepage/app
   targetNamespace: default
   sourceRef:
     kind: GitRepository
@@ -23,5 +23,5 @@ spec:
     substitute:
       APP: *appname
       HOSTNAME: home.${SECRET_DOMAIN}
-      APP_UID: "568"
-      APP_GID: "568"
+      # APP_UID: "568"
+      # APP_GID: "568"
