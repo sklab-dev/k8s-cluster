@@ -1,0 +1,27 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: default-homepage
+  namespace: flux-system
+spec:
+  path: ./kubernetes/talos/apps/default/homepage/app
+  targetNamespace: default
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: &appname homepage
+  prune: true
+  wait: false
+  interval: 10m
+  dependsOn:
+    - name: security-secret-store
+  postBuild:
+    substitute:
+      APP: *appname
+      HOSTNAME: home.${SECRET_DOMAIN}
+      APP_UID: "568"
+      APP_GID: "568"
