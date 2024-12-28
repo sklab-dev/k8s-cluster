@@ -55,10 +55,10 @@ spec:
         enabled: true
         className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: "interal.${SECRET_DOMAIN}"
-          # authentik.home.arpa/enabled: "true"
-          # nginx.ingress.kubernetes.io/auth-signin: |-
-          #   https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          authentik.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-signin: |-
+            https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
         hosts:
           - host: ${HOSTNAME}
             paths:
