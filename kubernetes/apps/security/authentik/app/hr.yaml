@@ -68,10 +68,11 @@ spec:
         serviceMonitor:
           enabled: true
     
-    persistence:
-      config:
-        enabled: true
-        existingClaim: *app
-        globalMounts:
-          - path: /data/config
+    # Need to sort out the storage
+    # persistence:
+    #   config:
+    #     enabled: true
+    #     existingClaim: *app
+    #     globalMounts:
+    #       - path: /data/config
 
