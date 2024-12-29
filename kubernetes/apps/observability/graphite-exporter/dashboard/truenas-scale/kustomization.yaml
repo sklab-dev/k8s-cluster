@@ -6,19 +6,19 @@ configMapGenerator:
   # Ref: https://raw.githubusercontent.com/Supporterino/truenas-graphite-to-prometheus/refs/heads/main/dashboards/truenas_scale.json
   - name: truenas-scale-dashboard 
     files:
-      - truenas_scale.json
+      - truenas-scale.json
   # Ref: https://raw.githubusercontent.com/Supporterino/truenas-graphite-to-prometheus/refs/heads/main/dashboards/truenas_scale_disk_insights.json
-  - name: truenas_scale_disk_insights
+  - name: truenas-scale-disk-insights
     files:
-      - truenas_scale_disk_insights.json
+      - truenas-scale-disk-insights.json
   # Ref: https://raw.githubusercontent.com/Supporterino/truenas-graphite-to-prometheus/refs/heads/main/dashboards/truenas_scale_applications_k3s.json
-  - name: truenas_scale_applications_k3s
+  - name: truenas-scale-applications-k3s
     files:
-      - truenas_scale_applications_k3s.json
+      - truenas-scale-applications-k3s.json
   # Ref: https://raw.githubusercontent.com/Supporterino/truenas-graphite-to-prometheus/refs/heads/main/dashboards/truenas_scale_temperatures.json
-  - name: truenas_scale_temperatures
+  - name: truenas-scale-temperatures
     files:
-      - truenas_scale_temperatures.json
+      - truenas-scale-temperatures.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
