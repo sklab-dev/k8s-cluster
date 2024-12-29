@@ -55,17 +55,16 @@ spec:
 
     ingress:
       main:
-        enabled: true
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/auth-signin: |-
-            https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
+          # nginx.ingress.kubernetes.io/auth-signin: |-
+          #   https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
         hosts:
           - host: &host "${HOSTNAME}"
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: main
                   port: *port
 
