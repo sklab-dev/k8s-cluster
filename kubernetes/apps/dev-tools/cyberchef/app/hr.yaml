@@ -60,7 +60,7 @@ spec:
           # nginx.ingress.kubernetes.io/auth-signin: |-
           #   https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Selfhosted
+          gethomepage.dev/group: Dev-Tools
           gethomepage.dev/name: CyberChef
         hosts:
           - host: &host "${HOSTNAME}"
