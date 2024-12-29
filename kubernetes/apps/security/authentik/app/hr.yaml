@@ -56,6 +56,9 @@ spec:
           # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Security
+          gethomepage.dev/name: Authentik
         hosts:
           - "auth.${SECRET_DOMAIN}"
             # paths:
