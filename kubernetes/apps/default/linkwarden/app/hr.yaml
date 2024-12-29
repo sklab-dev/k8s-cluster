@@ -77,6 +77,9 @@ spec:
         enabled: true
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Selfhosted
+          gethomepage.dev/name: Linkwarden
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
