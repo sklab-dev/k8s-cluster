@@ -263,6 +263,10 @@ spec:
       enabled: true
     ingress:
       enabled: true
+      Annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/group: Observability
+        gethomepage.dev/name: Grafana
       ingressClassName: internal
       hosts: ["grafana.${SECRET_DOMAIN}"]
     persistence:
