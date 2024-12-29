@@ -6,8 +6,8 @@ metadata:
   name: it-tools
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/default/it-tools/app
-  targetNamespace: default
+  path: ./kubernetes/apps/dev-tools/it-tools/app
+  targetNamespace: dev-tools
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
