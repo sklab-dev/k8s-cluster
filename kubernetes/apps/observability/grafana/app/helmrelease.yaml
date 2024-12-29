@@ -263,7 +263,7 @@ spec:
       enabled: true
     ingress:
       enabled: true
-      Annotations:
+      annotations:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/group: Observability
         gethomepage.dev/name: Grafana
