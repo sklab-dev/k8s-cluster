@@ -83,11 +83,13 @@ spec:
             port: 2003
           metrics:
             port: 9108
+            
     serviceMonitor:
       app:
         serviceName: graphite-exporter
         endpoints:
           - port: metrics
+            honorLabels: true
             scheme: http
             path: /metrics
             interval: 1m
