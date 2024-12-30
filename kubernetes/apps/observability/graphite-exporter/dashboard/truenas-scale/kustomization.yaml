@@ -11,10 +11,6 @@ configMapGenerator:
   - name: truenas-scale-disk-insights
     files:
       - truenas-scale-disk-insights.json
-  # Ref: https://raw.githubusercontent.com/Supporterino/truenas-graphite-to-prometheus/refs/heads/main/dashboards/truenas_scale_applications_k3s.json
-  - name: truenas-scale-applications-k3s
-    files:
-      - truenas-scale-applications-k3s.json
   # Ref: https://raw.githubusercontent.com/Supporterino/truenas-graphite-to-prometheus/refs/heads/main/dashboards/truenas_scale_temperatures.json
   - name: truenas-scale-temperatures
     files:
