@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./scrapeconfig.yaml
+configMapGenerator:
+  - name: truenas-restic-dashboard 
+    files:
+      - truenas-restic-dashboard.json
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    grafana_folder: Backup
+  labels:
+    grafana_dashboard: "true"
