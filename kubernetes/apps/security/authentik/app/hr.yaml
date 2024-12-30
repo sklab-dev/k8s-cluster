@@ -18,8 +18,8 @@ spec:
     global:
       deploymentAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
-      env:
-        AUTHENTIK_STORAGE__MEDIA__BACKEND: file
+      # env:
+      #   AUTHENTIK_STORAGE__MEDIA__BACKEND: file
       envFrom:
         - secretRef:
             name: *secret
