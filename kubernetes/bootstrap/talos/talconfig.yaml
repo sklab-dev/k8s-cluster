@@ -32,16 +32,32 @@ nodes:
       - deviceSelector:
           hardwareAddr: "bc:24:11:c2:35:14"
           busPath: 0000:00:12.0                                                                                                                                                     
-          driver: virtio_net         
-        dhcp: false
-        addresses:
-          - "10.10.0.81/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.10.0.1"
-        mtu: 1500
-        vip:
-          ip: "10.10.0.80"
+          driver: virtio_net   
+        vlans:
+          - vlanId: 1000
+            dhcp: false
+            addresses:
+              - 10.10.0.81/24
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.10.0.1
+            vip:
+              ip: 10.10.0.80   
+          - &vlan40
+            vlanId: 40
+            mtu: 1500
+            dhcp: true
+            dhcpOptions:
+              routeMetric: 4096   
+        # dhcp: false
+        # addresses:
+        #   - "10.10.0.81/24"
+        # routes:
+        #   - network: 0.0.0.0/0
+        #     gateway: "10.10.0.1"
+        # mtu: 1500
+        # vip:
+        #   ip: "10.10.0.80"
   - hostname: "talos-2"
     ipAddress: "10.10.0.82"
     installDisk: "/dev/sda"
@@ -52,15 +68,26 @@ nodes:
           hardwareAddr: "bc:24:11:07:c8:df"
           busPath: 0000:00:12.0                                                                                                                                                     
           driver: virtio_net  
-        dhcp: false
-        addresses:
-          - "10.10.0.82/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.10.0.1"
-        mtu: 1500
-        vip:
-          ip: "10.10.0.80"
+        vlans:
+          - vlanId: 1000
+            dhcp: false
+            addresses:
+              - 10.10.0.82/24
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.10.0.1
+            vip:
+              ip: 10.10.0.80    
+          - *vlan40
+        # dhcp: false
+        # addresses:
+        #   - "10.10.0.82/24"
+        # routes:
+        #   - network: 0.0.0.0/0
+        #     gateway: "10.10.0.1"
+        # mtu: 1500
+        # vip:
+        #   ip: "10.10.0.80"
   - hostname: "talos-3"
     ipAddress: "10.10.0.83"
     installDisk: "/dev/sda"
@@ -71,15 +98,26 @@ nodes:
           hardwareAddr: "bc:24:11:20:cc:1f"
           busPath: 0000:00:12.0                                                                                                                                                     
           driver: virtio_net  
-        dhcp: false
-        addresses:
-          - "10.10.0.83/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.10.0.1"
-        mtu: 1500
-        vip:
-          ip: "10.10.0.80"
+        vlans:
+          - vlanId: 1000
+            dhcp: false
+            addresses:
+              - 10.10.0.83/24
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.10.0.1
+            vip:
+              ip: 10.10.0.80   
+          - *vlan40 
+        # dhcp: false
+        # addresses:
+        #   - "10.10.0.83/24"
+        # routes:
+        #   - network: 0.0.0.0/0
+        #     gateway: "10.10.0.1"
+        # mtu: 1500
+        # vip:
+        #   ip: "10.10.0.80"
 
 # Global patches
 patches:
