@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/refs/heads/main/jsonnet/prometheus-operator/scrapeconfigs-crd.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: proxmox-node-exporter
+  labels:
+    release: prometheus-stack # required since prometheus.prometheusSpec.scrapeConfigsSelectorNilUsesHelmValues is true (default) and prometheus.prometheusSpec.scrapeConfigsSelector is not set (default). I got this label from the prometheus-stack operator labels, so check yours to ensure it's correct.
+spec:
+  staticConfigs:
+    - labels:
+        job: proxmox-node-exporter
+      targets:
+        - prox-1.cluster.sklab.dev:9100
+        - prox-2.cluster.sklab.dev:9100
+        - prox-3.cluster.sklab.dev:9100
+  metricsPath: /metrics
+  scheme: HTTP
+  scrapeInterval: 10s
