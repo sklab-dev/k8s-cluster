@@ -79,7 +79,7 @@ data:
               url: {{HOMEPAGE_VAR_PROXMOX_HOST_URL}}
               username: {{HOMEPAGE_VAR_PROXMOX_TOKEN_ID}}
               password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
-      - Home:
+    - Home:
         - Voron:
             href: http://voron.home.${SECRET_DOMAIN}
             icon: voron.png
