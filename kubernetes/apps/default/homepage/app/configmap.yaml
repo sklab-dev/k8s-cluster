@@ -79,6 +79,13 @@ data:
               url: {{HOMEPAGE_VAR_PROXMOX_HOST_URL}}
               username: {{HOMEPAGE_VAR_PROXMOX_TOKEN_ID}}
               password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
+      - Home:
+        - Voron:
+            href: http://voron.home.${SECRET_DOMAIN}
+            icon: voron.png
+            widget:
+              type: moonraker
+              url: http://voron.home.${SECRET_DOMAIN}
   settings.yaml: |
     title: Dashboard
     background: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
@@ -116,9 +123,6 @@ data:
         cpu: true
         expanded: true
         memory: true
-    - moonraker:
-        type: moonraker
-        url: http://voron.home.${SECRET_DOMAIN}
     - search:
         provider: [brave, bing]
         focus: false
