@@ -116,6 +116,9 @@ data:
         cpu: true
         expanded: true
         memory: true
+    - moonraker:
+        type: moonraker
+        url: http://voron.home.${SECRET_DOMAIN}
     - search:
         provider: [brave, bing]
         focus: false
