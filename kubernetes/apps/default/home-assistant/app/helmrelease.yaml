@@ -103,6 +103,7 @@ spec:
             homekit:
               port: 21061
               protocol: TCP
+              
     ingress:
       app:
         className: external
