@@ -93,7 +93,7 @@ spec:
             port: 8123
           code-server:
             port: 12321
-      expose:
+      homebridge:
           primary: false
           controller: "home-assistant"
           type: LoadBalancer
@@ -103,7 +103,7 @@ spec:
             homekit:
               port: 21061
               protocol: TCP
-              
+
     ingress:
       app:
         className: external
