@@ -93,16 +93,16 @@ spec:
             port: 8123
           code-server:
             port: 12321
-    expose:
-        primary: false
-        controller: "home-assistant"
-        type: LoadBalancer
-        annotations:
-          "io.cilium/lb-ipam-ips": "10.40.0.100/16"
-        ports:
-          homekit:
-            port: 21061
-            protocol: TCP
+      expose:
+          primary: false
+          controller: "home-assistant"
+          type: LoadBalancer
+          annotations:
+            "io.cilium/lb-ipam-ips": "10.40.0.100/16"
+          ports:
+            homekit:
+              port: 21061
+              protocol: TCP
     ingress:
       app:
         className: external
