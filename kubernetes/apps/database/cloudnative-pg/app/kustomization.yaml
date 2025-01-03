@@ -5,3 +5,15 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
+configMapGenerator:
+  - name: cloudnative-pg-dashboard 
+    files:
+      - cloudnative-pg-dashboard.json
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    grafana_folder: Database
+  labels:
+    grafana_dashboard: "true"
+
+
