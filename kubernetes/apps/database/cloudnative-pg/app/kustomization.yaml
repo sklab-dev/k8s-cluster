@@ -8,11 +8,7 @@ resources:
 configMapGenerator:
   - name: cloudnative-pg-dashboard 
     files:
-<<<<<<< HEAD
       - cloudnative-pg-dashboard.json
-=======
-      - cloudnative-pg-dashboard .json
->>>>>>> dd8737198c21df35c50847370ef7a01426d0f91d
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
