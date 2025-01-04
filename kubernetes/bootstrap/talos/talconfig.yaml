@@ -46,7 +46,7 @@ nodes:
           - &vlan40
             vlanId: 40
             mtu: 1500
-            dhcp: true
+            dhcp: false
             dhcpOptions:
               routeMetric: 4096   
         # dhcp: false
