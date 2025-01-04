@@ -22,7 +22,7 @@ spec:
       APP: *appname
       APP_UID: "0"
       APP_GID: "0"
-      VOLSYNC_CLAIM: matter-server-config
+      VOLSYNC_CLAIM: matter-server
       VOLSYNC_CAPACITY: 1Gi
   dependsOn:
     # - name: topolvm
