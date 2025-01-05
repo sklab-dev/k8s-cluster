@@ -3,9 +3,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # Pre Flux-Kustomizations
-  - ./namespace.yaml
-  # Flux-Kustomizations
-  - ./atuin/ks.yaml
-  - ./it-tools/ks.yaml
-  - ./cyberchef/ks.yaml
+  - ./externalsecret.yaml
+  - ./helmrelease.yaml
