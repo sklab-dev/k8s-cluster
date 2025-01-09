@@ -42,6 +42,7 @@ spec:
               DEBUG: false
               SMTP_RELAY_METRICS_PORT: &metricsPort 8080
               SMTP_RELAY_SMTP_PORT: &smtpPort 25
+              SMTP_OVERRIDE_DOMAIN: ${SECRET_DOMAIN}
             envFrom:
               - secretRef:
                   name: smtp-relay-secret
