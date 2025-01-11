@@ -32,14 +32,17 @@ spec:
               tag: v0.12.0@sha256:d6dcd19f87021a7734633e8ceb94b45ce03e1b5251fd996092c0e35a92fcbc38
             env:
               TZ: America/New_York
-            args: [
-              "--web.listen-address" , ":80",
-            ]
             probes:
               liveness:
                 enabled: true
+                spec:
+                  tcpSocket:
+                    port: &port 9101
               readiness:
                 enabled: true
+                spec:
+                  tcpSocket:
+                    port: *port
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -60,7 +63,7 @@ spec:
         controller: klipper
         ports:
           http:
-            port: 80
+            port: *port
     serviceMonitor:
       app:
         serviceName: klipper
