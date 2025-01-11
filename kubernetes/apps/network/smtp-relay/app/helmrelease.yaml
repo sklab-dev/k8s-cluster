@@ -54,6 +54,8 @@ spec:
         externalTrafficPolicy: Cluster
         annotations:
           lbipam.cilium.io/ips: "10.10.0.160"
+          external-dns.alpha.kubernetes.io/hostname: smtp.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         ports:
           smtp:
             port: *smtpPort
