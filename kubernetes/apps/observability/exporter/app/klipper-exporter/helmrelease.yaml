@@ -32,6 +32,9 @@ spec:
               tag: v0.12.0@sha256:d6dcd19f87021a7734633e8ceb94b45ce03e1b5251fd996092c0e35a92fcbc38
             env:
               TZ: America/New_York
+            args: [
+              "--web.listen-address" , ":80",
+            ]
             probes:
               liveness:
                 enabled: true
