@@ -50,11 +50,15 @@ spec:
     service:
       app:
         controller: smtp-relay
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        annotations:
+          lbipam.cilium.io/ips: "10.10.0.160"
         ports:
           smtp:
             port: *smtpPort
           metrics:
-            # enabled: true
+            enabled: true
             port: *metricsPort
 
     serviceMonitor:
