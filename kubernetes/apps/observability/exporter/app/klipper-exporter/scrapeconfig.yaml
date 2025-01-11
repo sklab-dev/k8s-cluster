@@ -1,0 +1,36 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/refs/heads/main/jsonnet/prometheus-operator/scrapeconfigs-crd.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: klipper-voron-scrape
+  labels:
+    release: prometheus-stack # required since prometheus.prometheusSpec.scrapeConfigsSelectorNilUsesHelmValues is true (default) and prometheus.prometheusSpec.scrapeConfigsSelector is not set (default). I got this label from the prometheus-stack operator labels, so check yours to ensure it's correct.
+spec:
+  staticConfigs:
+    - labels:
+        job: klipper-voron
+      targets:
+        - 10.0.4.210:7125
+  metricsPath: /probe
+  scheme: HTTP
+  scrapeInterval: 10s
+  params:
+    modules: [ 
+            'process_stats',
+            'network_stats',
+            'system_info',
+            'job_queue',
+            'directory_info',
+            'printer_objects',
+            'history',
+            'spoolman',
+          ]
+  relabelings: 
+      - sourceLabels: [__address__]
+        targetLabel: __param_target
+      - sourceLabels: [__param_target]
+        targetLabel: instance
+      - targetLabel: __address__
+        replacement: klipper-exporter.observability.svc.cluster.local # host where the klipper-exporter is running
+      
