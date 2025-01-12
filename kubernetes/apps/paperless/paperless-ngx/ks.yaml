@@ -24,7 +24,7 @@ spec:
     - name: csi-driver-nfs
     - name: redis
     - name: cloudnative-pg-cluster
-    - name: volsync-system
+    - name: volsync
     # - name: database-dragonfly-cluster
     # - name: security-secret-store
     # - name: storage-democratic-csi-nfs
