@@ -13,3 +13,4 @@ spec:
     requests:
       storage: 50Gi
   storageClassName: ceph-block
+  volumeMode: Filesystem
