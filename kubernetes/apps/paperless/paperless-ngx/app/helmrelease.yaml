@@ -102,7 +102,9 @@ spec:
             image:
               repository: "apache/tika"
               tag: "3.0.0.0-full@sha256:82698af9bacf3dbd80ba7a18cc69d06596af107169fddcb8a067f6bb1bd10426"
-            securityContext: *sc
+            securityContext:
+              <<: *sc
+              readOnlyRootFilesystem: false
             resources: # TODO: adjust (Java app)
               requests:
                 cpu: "10m"
