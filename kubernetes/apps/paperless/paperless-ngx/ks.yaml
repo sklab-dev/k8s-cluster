@@ -31,7 +31,7 @@ spec:
     # - name: storage-volsync  
   postBuild:
     substitute:
-      APP: *appname
+      APP: *app
       HOSTNAME: paperless.${SECRET_DOMAIN}
       GATUS_SUBDOMAIN: docs
       GATUS_PATH: /status.php
