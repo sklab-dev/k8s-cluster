@@ -35,6 +35,7 @@ spec:
       HOSTNAME: paperless.${SECRET_DOMAIN}
       GATUS_SUBDOMAIN: docs
       GATUS_PATH: /status.php
+      VOLSYNC_CLAIM: paperless-data
       VOLSYNC_CAPACITY: 50Gi
       VOLSYNC_CACHE_CAPACITY: 5Gi
       VOLSYNC_TIME: 0 3 * * *
