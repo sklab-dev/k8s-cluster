@@ -1,0 +1,216 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app paperless-ngx
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      paperless:
+        annotations:
+          secret.reloader.stakater.com/reload: &secret paperless-secret
+        initContainers:
+          01-init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.6
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: *secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/paperless-ngx/paperless-ngx
+              tag: 2.13.5
+            env:
+              PAPERLESS_CONSUMER_POLLING: 60
+              PAPERLESS_CONSUMER_RECURSIVE: "true"
+              PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
+
+              # Folders
+              PAPERLESS_CONSUMPTION_DIR: &consume "/nas-consume"
+              PAPERLESS_DATA_DIR: &pvc "/data/data"
+              PAPERLESS_EXPORT_DIR: &export "/data/export"
+              PAPERLESS_MEDIA_ROOT: &media "/data/media"
+              PAPERLESS_TRASH_DIR: &trash "/data/trash"
+
+
+              PAPERLESS_OCR_LANGUAGES: eng ger
+              PAPERLESS_OCR_LANGUAGE: eng
+              PAPERLESS_OCR_USER_ARGS: '{"invalidate_digital_signatures": true}'
+              PAPERLESS_PORT: &port 8000
+              PAPERLESS_TASK_WORKERS: 2
+              PAPERLESS_TIKA_ENABLED: 1
+              PAPERLESS_TIKA_GOTENBERG_ENDPOINT: "http://gotenberg.paperless.svc.cluster.local"
+              PAPERLESS_TIKA_ENDPOINT: http://tika.paperless.svc.cluster.local
+              PAPERLESS_TIME_ZONE: ${CONFIG_TIMEZONE}
+              PAPERLESS_URL: https://${HOSTNAME}
+            envFrom:
+              - secretRef:
+                  name: *secret
+            resources:
+              requests:
+                cpu: 100m
+                memory: 1000Mi
+              limits:
+                memory: 5000Mi
+            securityContext: &sc
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 30
+                  timeoutSeconds: 2
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 0
+                  timeoutSeconds: 1
+                  failureThreshold: 10
+                  periodSeconds: 12   
+      tika:
+        type: deployment
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: "ghcr.io/paperless-ngx/tika"
+              tag: "2.9.1-full@sha256:d59c38244949a418ef16be676eeea770e1616b45986661847d373f4de048a37e"
+            securityContext: *sc
+            resources: # TODO: adjust (Java app)
+              requests:
+                cpu: "10m"
+                memory: "256Mi"
+              limits:
+                cpu: "3000m"
+                memory: "6000Mi"    
+      gotenberg:
+        type: deployment
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: "docker.io/gotenberg/gotenberg"
+              tag: "8.15.3@sha256:cec2b75259ea1828bc473521b83c1d4e4a6c45209c56bd6bb0f98f79c071e70d"
+            command: ["gotenberg", "--chromium-disable-javascript=true", "--chromium-allow-list=file:///tmp/.*"]
+            securityContext: *sc
+            resources: # TODO: adjust (Go app)
+              requests:
+                cpu: "10m"
+                memory: "64Mi"
+              limits:
+                cpu: "3000m"
+                memory: "6000Mi"    
+    service:
+      paperless:
+        controller: "paperless"
+        ports:
+          http:
+            port: *port
+      tika:
+        controller: "tika"
+        ports:
+          tika:
+            port: 80
+            targetPort: 9998
+      gotenberg:
+        controller: "gotenberg"
+        ports:
+          gotenberg:
+            port: 80
+            targetPort: 3000
+
+
+    ingress:
+      paperless:
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Selfhosted
+          gethomepage.dev/name: Paperless
+          gethomepage.dev/icon: paperless-ngx.png
+          # gethomepage.dev/widget.type: paperlessngx
+          # gethomepage.dev/widget.url: http://paperless.selfhosted:8000
+          # gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PAPERLESS_TOKEN}}"
+        hosts:
+          - host: ${HOSTNAME}
+            paths:
+              - path: /
+                service:
+                  identifier: paperless
+                  port: http
+
+    persistence:
+      data:
+        existingClaim: ${VOLSYNC_CLAIM}
+        advancedMounts:
+          paperless:
+            app:
+              - path: /data
+      nas-consume:
+        existingClaim: nfs-documents-paperless-consume
+        advancedMounts:
+          paperless:
+            app:
+              - path: "/nas-consume"
+      nas:
+        existingClaim: nfs-documents-paperless
+        advancedMounts:
+          paperless:
+            app:
+              - path: "/nas"
+
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      enableServiceLinks: false # avoid exposing too much info in env vars in case of lateral movement attempt
+      hostAliases:
+        - ip: "${APP_IP_AUTHENTIK:=127.0.0.1}"
+          hostnames: ["${APP_DNS_AUTHENTIK:=authentik}"]
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: &uid 1000 # hardcoded `paperless` user
+        runAsGroup: *uid
+        fsGroup: *uid
+        fsGroupChangePolicy: "Always"
+        seccompProfile: { type: "RuntimeDefault" }
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: "DoNotSchedule"
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: *app
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: "fuckoff.home.arpa/paperless-ngx"
+      #               operator: "DoesNotExist"

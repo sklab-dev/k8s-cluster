@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-documents-paperless-consume
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes: 
+    - ReadWriteMany
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=4.2
+    - nconnect=8
+    - hard
+    - noatime
+    - nodiratime
+    - uid=3011 # para
+    - gid=3014 # para
+  csi:
+    driver: nfs.csi.k8s.io
+    volumeHandle: nfs-documents-paperless-consume
+    volumeAttributes:
+      server: nas.${SECRET_DOMAIN}
+      share: /mnt/storage/PARA/0-Inbox/0-Document-Auto-Import
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-documents-paperless-consume
+spec:
+  accessModes: 
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: nfs-documents-paperless-consume

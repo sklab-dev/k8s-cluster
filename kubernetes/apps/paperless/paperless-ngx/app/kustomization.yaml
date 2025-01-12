@@ -1,0 +1,11 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./externalsecret.yaml
+  - ./helmrelease.yaml
+  - ./nfs-documents-paperless-pvc.yaml
+  - ./nfs-documents-paperless-consume-pvc.yaml
+  - ./../../../../templates/gatus/guarded
+  - ./../../../../templates/volsync
