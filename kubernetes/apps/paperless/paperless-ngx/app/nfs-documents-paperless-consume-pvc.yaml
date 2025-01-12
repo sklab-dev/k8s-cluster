@@ -8,7 +8,7 @@ spec:
   accessModes: 
     - ReadWriteMany
   volumeMode: Filesystem
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete
   mountOptions:
     - nfsvers=4.2
     - nconnect=8
