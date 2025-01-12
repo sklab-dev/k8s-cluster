@@ -5,8 +5,8 @@ metadata:
   name: nfs-csi-volsync
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: nas.sklab.dev
-  share: /mnt/storage/k8s.sklab.dev/volsync
+  server: nas.${SECRET_DOMAIN}
+  share: /mnt/storage/
   # csi.storage.k8s.io/provisioner-secret is only needed for providing mountOptions in DeleteVolume
   # csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   # csi.storage.k8s.io/provisioner-secret-namespace: "default"
