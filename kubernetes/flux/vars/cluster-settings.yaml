@@ -5,4 +5,5 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  CONFIG_TIMEZONE: America/New_York
   SETTING_EXAMPLE: Global settings for your cluster go in this file, this file is NOT encrypted
