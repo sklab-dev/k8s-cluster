@@ -6,7 +6,7 @@ metadata:
   name: &app paperless-ngx
   namespace: flux-system
 spec:
-  targetNamespace: observability
+  targetNamespace: paperless
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
