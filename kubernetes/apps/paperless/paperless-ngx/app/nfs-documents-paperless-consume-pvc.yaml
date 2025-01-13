@@ -21,7 +21,7 @@ spec:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-documents-paperless-consume
     volumeAttributes:
-      server: nas.${SECRET_DOMAIN}
+      server: ${CONFIG_NAS_IPV4_ADDRESS}
       share: /mnt/storage/PARA/0-Inbox/0-Document-Auto-Import
 ---
 apiVersion: v1

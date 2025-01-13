@@ -21,7 +21,7 @@ spec:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-documents-paperless
     volumeAttributes:
-      server: nas.${SECRET_DOMAIN}
+      server: ${CONFIG_NAS_IPV4_ADDRESS}
       share: /mnt/storage/PARA/2-Areas/Documents
 ---
 apiVersion: v1
