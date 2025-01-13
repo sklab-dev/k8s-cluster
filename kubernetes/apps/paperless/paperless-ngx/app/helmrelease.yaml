@@ -66,7 +66,7 @@ spec:
               limits:
                 memory: 5000Mi
             securityContext: &sc
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               allowPrivilegeEscalation: false
               capabilities:
                 drop: ["ALL"]
