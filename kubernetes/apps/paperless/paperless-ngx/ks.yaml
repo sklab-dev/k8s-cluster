@@ -32,8 +32,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      APP_UID: "3011"
-      APP_GID: "3014"
       HOSTNAME: paperless.${SECRET_DOMAIN}
       GATUS_SUBDOMAIN: docs
       GATUS_PATH: /status.php
