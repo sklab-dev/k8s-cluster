@@ -15,8 +15,8 @@ spec:
     # - hard
     # - noatime
     # - nodiratime
-    # - uid=3011 # para
-    # - gid=3014 # para
+    - uid=3011 # para
+    - gid=3014 # para
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-documents-paperless-consume
