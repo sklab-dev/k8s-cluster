@@ -35,10 +35,9 @@ spec:
       HOSTNAME: paperless.${SECRET_DOMAIN}
       GATUS_SUBDOMAIN: docs
       GATUS_PATH: /status.php
-      # VOLSYNC_CLAIM: *app
-      VOLSYNC_CLAIM: *app
+      
       VOLSYNC_CAPACITY: 50Gi
       VOLSYNC_CACHE_CAPACITY: 5Gi
       # VOLSYNC_TIME: 0 3 * * *
-      # VOLSYNC_STORAGECLASS: ceph-block
-      # VOLSYNC_SNAPSHOTCLASS: csi-ceph-blockpool
+      VOLSYNC_STORAGECLASS: ceph-block
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-blockpool
