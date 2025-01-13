@@ -56,6 +56,8 @@ spec:
               PAPERLESS_TIKA_ENDPOINT: http://tika.paperless.svc.cluster.local
               PAPERLESS_TIME_ZONE: ${CONFIG_TIMEZONE}
               PAPERLESS_URL: https://${HOSTNAME}
+              USERMAP_UID: 3011
+              USERMAP_GID: 3014
             envFrom:
               - secretRef:
                   name: *secret
@@ -65,11 +67,8 @@ spec:
                 memory: 1000Mi
               limits:
                 memory: 5000Mi
-            securityContext: &sc
-              readOnlyRootFilesystem: false
-              allowPrivilegeEscalation: true
-              capabilities:
-                drop: ["ALL"]
+            securityContext:
+              supplementalGroups: ["3014"]
             probes:
               liveness: &probes
                 enabled: true
@@ -103,8 +102,8 @@ spec:
               repository: "apache/tika"
               tag: "3.0.0.0-full@sha256:82698af9bacf3dbd80ba7a18cc69d06596af107169fddcb8a067f6bb1bd10426"
             securityContext:
-              <<: *sc
-              readOnlyRootFilesystem: false
+              runAsUser: 65534
+              runAsGroup: 65534
             resources: # TODO: adjust (Java app)
               requests:
                 cpu: "10m"
@@ -121,7 +120,9 @@ spec:
               repository: "docker.io/gotenberg/gotenberg"
               tag: "8.15.3@sha256:cec2b75259ea1828bc473521b83c1d4e4a6c45209c56bd6bb0f98f79c071e70d"
             command: ["gotenberg", "--chromium-disable-javascript=true", "--chromium-allow-list=file:///tmp/.*"]
-            securityContext: *sc
+            securityContext:
+              runAsUser: 65534
+              runAsGroup: 65534
             resources: # TODO: adjust (Go app)
               requests:
                 cpu: "10m"
