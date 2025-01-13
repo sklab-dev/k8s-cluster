@@ -67,7 +67,7 @@ spec:
                 memory: 5000Mi
             securityContext: &sc
               readOnlyRootFilesystem: false
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
               capabilities:
                 drop: ["ALL"]
             probes:
