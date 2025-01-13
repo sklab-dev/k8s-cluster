@@ -32,10 +32,12 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      APP_UID: "3011"
+      APP_GID: "3014"
       HOSTNAME: paperless.${SECRET_DOMAIN}
       GATUS_SUBDOMAIN: docs
       GATUS_PATH: /status.php
-      
+
       VOLSYNC_CAPACITY: 50Gi
       VOLSYNC_CACHE_CAPACITY: 5Gi
       # VOLSYNC_TIME: 0 3 * * *
