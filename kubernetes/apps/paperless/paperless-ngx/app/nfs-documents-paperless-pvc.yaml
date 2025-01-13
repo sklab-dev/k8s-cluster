@@ -11,12 +11,12 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   mountOptions:
     - nfsvers=4.1
-    # - nconnect=8
-    # - hard
-    # - noatime
-    # - nodiratime
-    - uid=3011 # para
-    - gid=3014 # para
+    - nconnect=8
+    - hard
+    - noatime
+    - nodiratime
+    # - uid=3011 # para
+    # - gid=3014 # para
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-documents-paperless
