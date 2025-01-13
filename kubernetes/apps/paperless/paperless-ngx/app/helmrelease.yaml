@@ -52,8 +52,10 @@ spec:
               PAPERLESS_PORT: &port 8000
               PAPERLESS_TASK_WORKERS: 2
               PAPERLESS_TIKA_ENABLED: 1
-              PAPERLESS_TIKA_GOTENBERG_ENDPOINT: "http://gotenberg.paperless.svc.cluster.local"
-              PAPERLESS_TIKA_ENDPOINT: http://tika.paperless.svc.cluster.local
+              # Redis
+              PAPERLESS_REDIS: redis://paperless-ngx-redis.paperless.svc.cluster.local:6379
+              PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-ngx-gotenberg.paperless.svc.cluster.local
+              PAPERLESS_TIKA_ENDPOINT: http://paperless-ngx-tika.paperless.svc.cluster.local
               PAPERLESS_TIME_ZONE: ${CONFIG_TIMEZONE}
               PAPERLESS_URL: https://${HOSTNAME}
               USERMAP_UID: 3011
@@ -93,6 +95,19 @@ spec:
                   timeoutSeconds: 1
                   failureThreshold: 10
                   periodSeconds: 12   
+      redis:
+        containers:
+          redis:
+            image:
+              repository: docker.io/valkey/valkey
+              tag: 8.0.1
+            resources:
+              requests:
+                cpu: 5m
+                memory: 32Mi
+              limits:
+                memory: 128Mi
+
       tika:
         type: deployment
         replicas: 1
@@ -132,18 +147,23 @@ spec:
                 memory: "6000Mi"    
     service:
       paperless:
-        controller: "paperless"
+        controller: paperless
         ports:
           http:
             port: *port
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
       tika:
-        controller: "tika"
+        controller: tika
         ports:
           tika:
             port: 80
             targetPort: 9998
       gotenberg:
-        controller: "gotenberg"
+        controller: gotenberg
         ports:
           gotenberg:
             port: 80
