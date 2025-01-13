@@ -193,10 +193,18 @@ spec:
     persistence:
       data:
         existingClaim: *app
-        advancedMounts:
-          paperless:
-            app:
-              - path: /data
+        globalMounts:
+          - subPath: "consume"
+            path: "/data/consume"
+          - subPath: "data"
+            path: "/data/data"
+          - subPath: "export"
+            path: "/data/export"
+          - subPath: "media"
+            path: "/data/media"
+          - subPath: "trash"
+            path: "/data/trash"
+            
       nas-consume:
         existingClaim: nfs-documents-paperless-consume
         advancedMounts:
