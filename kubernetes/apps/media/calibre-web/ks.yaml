@@ -28,9 +28,9 @@ spec:
     substitute:
       APP: *appname
       HOSTNAME: calibre-web.${SECRET_DOMAIN}
-      VOLSYNC_CLAIM: calibre-web-config
       GATUS_SUBDOMAIN: media
 
+      VOLSYNC_CLAIM: calibre-web-config
       VOLSYNC_CAPACITY: 1Gi
       VOLSYNC_CACHE_CAPACITY: 1Gi
       VOLSYNC_STORAGECLASS: ceph-block
