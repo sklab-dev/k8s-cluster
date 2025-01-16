@@ -1,3 +1,4 @@
+```
 services:
   restic:
     name: restic
@@ -15,3 +16,5 @@ services:
       - '8000:22'
     volumes:
       - mnt/storage/k8s.sklab.dev/volsync:/repository
+
+```
