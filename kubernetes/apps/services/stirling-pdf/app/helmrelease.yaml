@@ -26,6 +26,7 @@ spec:
       app:
         annotations:
           reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: &secret paperless-secret
         containers:
           app:
             image:
@@ -40,6 +41,9 @@ spec:
               SECURITY_OAUTH2_ENABLED: "true"
               SECURITY_OAUTH2_AUTOCREATEUSER: "true"
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "true"
+            envFrom:
+              - secretRef:
+                  name: *secret
             probes:
               liveness: &probe
                 enabled: true
