@@ -37,9 +37,9 @@ spec:
               TZ: ${CONFIG_TIMEZONE}
               DOCKER_ENABLE_SECURITY: "true"
               SECURITY_ENABLELOGIN: "true"
-              SECURITY_LOGINMETHOD: "oauth2"
-              SECURITY_OAUTH2_ENABLED: "true"
-              SECURITY_OAUTH2_AUTOCREATEUSER: "true"
+              # SECURITY_LOGINMETHOD: "oauth2"
+              # SECURITY_OAUTH2_ENABLED: "true"
+              # SECURITY_OAUTH2_AUTOCREATEUSER: "true"
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "true"
             envFrom:
               - secretRef:
