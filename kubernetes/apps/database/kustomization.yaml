@@ -7,3 +7,4 @@ resources:
   - ./cloudnative-pg/ks.yaml
   - ./emqx/ks.yaml
   - ./redis/ks.yaml
+  - ./ferretdb/ks.yaml
