@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   # Namespace
   - ./namespace.yaml
+  - ./block-explorer/ks.yaml
