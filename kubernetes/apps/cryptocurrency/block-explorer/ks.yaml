@@ -6,7 +6,7 @@
 #   name: &app merge-explorer
 #   namespace: flux-system
 # spec:
-#   targetNamespace: database
+#   targetNamespace: cryptocurrency
 #   commonMetadata:
 #     labels:
 #       app.kubernetes.io/name: *app
@@ -37,7 +37,7 @@ metadata:
   name: &app merge-wallet
   namespace: flux-system
 spec:
-  targetNamespace: database
+  targetNamespace: cryptocurrency
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
