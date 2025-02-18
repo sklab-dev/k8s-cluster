@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app merge-explorer
+  namespace: flux-system
+spec:
+  targetNamespace: cryptocurrency
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  dependsOn:
+    - name: ferretdb
+    - name: merge-wallet
+    - name: ingress-nginx-external
+  path: ./kubernetes/apps/cryptocurrency/block-explorer/merge-explorer
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  timeout: 5m
+  postBuild:
+    substitute:
+      APP: *app
+      GATUS_SUBDOMAIN: merge-block-explorer
+      HOSTNAME: merge.${EXPLORER_DOMAIN}
+      # VOLSYNC_STORAGECLASS: ceph-block
+      # VOLSYNC_SNAPSHOTCLASS: csi-ceph-blockpool
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app merge-wallet
+  namespace: flux-system
+spec:
+  targetNamespace: cryptocurrency
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  dependsOn:
+    - name: volsync
+  path: ./kubernetes/apps/cryptocurrency/block-explorer/merge-wallet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  postBuild:
+    substitute:
+      APP: *app
+      VOLSYNC_CAPACITY: 20Gi
+      VOLSYNC_STORAGECLASS: ceph-block
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-blockpool

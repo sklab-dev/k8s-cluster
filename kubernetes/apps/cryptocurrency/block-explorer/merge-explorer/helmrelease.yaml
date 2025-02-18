@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app merge-explorer
+  # labels:
+  #   nginx.ingress.home.arpa/type: auth-external-only
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false  
+  values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: merge-explorer-ghcr-secret
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: "merge-explorer-secret,merge-explorer-ghcr-secret"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sklab-dev/block-explorer
+              tag: latest
+            env:
+              TZ: "${CONFIG_TZ}"
+              PM2_INSTANCES: "4"
+              PM2_SECRET_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: merge-explorer-secret 
+                    key: PM2_SECRET_KEY
+              PM2_PUBLIC_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: merge-explorer-secret 
+                    key: PM2_PUBLIC_KEY
+              CRONTASK_2: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_market.lockfile /usr/local/bin/nodejs scripts/sync.js market > /dev/null 2>&1"
+              CRONTASK_3: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_peers.lockfile /usr/local/bin/nodejs scripts/peers.js > /dev/null 2>&1"
+              CRONTASK_4: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_masternoddes.lockfile /usr/local/bin/nodejs scripts/masternodes.js market > /dev/null 2>&1"
+              CRONTASK_1: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_index.lockfile /usr/local/bin/nodejs scripts/sync.js index update > /dev/null 2>&1"
+              CRONTASK_5: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_masternoddes.lockfile /usr/local/bin/nodejs scripts/market.js update > /dev/null 2>&1"
+              CRONTASK_6: "0 */1 * * * root rm /explorer/tmp/index.pid &&  rm /explorer/tmp/peers.pid &&  rm /explorer/tmp/masternode.pid > /dev/null 2>&1"
+            command: []
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 500Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 3000
+
+    persistence:
+      explorer-settings:
+        enabled: true
+        type: secret
+        name: merge-explorer-secret
+        globalMounts:
+          - path: /explorer/settings.json
+            subPath: settings.json
