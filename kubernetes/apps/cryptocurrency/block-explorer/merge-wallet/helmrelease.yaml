@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app merge-wallet
+  # labels:
+  #   nginx.ingress.home.arpa/type: auth-external-only
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false  
+  values:
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: &secret merge-wallet-secret
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sklab-dev/merge-wallet
+              tag: 1.0.3@sha256:8e9720553f8e2d03908172f9b3dea965d5ca07d736dfe58e61c6451a83b8f10f
+            env:
+              TZ: "${CONFIG_TZ}"
+            envFrom:
+              - secretRef:
+                  name: *secret
+            command: [
+                "/usr/local/bin/merged",
+                "-printtoconsole",
+                "-testnet=0",
+                "-server=1",
+                "-daemon=0",
+                "-rpcuser=$(MERGE_WALLET_RPC_USER)",
+                "-rpcpassword=$(MERGE_WALLET_RPC_PASSWORD)",
+                "-rpcport=5521",
+                "-rpcallowip=0.0.0.0/0",
+                "-txindex=1",
+                "-maxconnections=512",
+                "-staking=0",
+                "-listen=1",
+                "-rpcbind=0.0.0.0",
+                "-addnode=80.210.127.4:52000",
+                "-addnode=149.50.116.31:20022",
+                "-addnode=185.12.204.22:51998",
+                "-addnode=2604:86c0:3001:3:e000::143:52000",
+                "-addnode=144.202.1.21:52000",
+                "-addnode=91.215.91.254",
+                "-addnode=45.87.3.47",
+                "-addnode=45.81.227.87",
+                "-addnode=144.202.1.21",
+                "-addnode=104.1.241.44",
+                "-addnode=38.99.82.50",
+                "-seednode=merge.mergeseeders.org",
+                "-dns"
+              ]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 4000Mi
+    service:
+      main:
+        controller: main
+        ports:
+          rpc:
+            port: 5521
+          blockchain:
+            port: 52000
+
+    persistence:
+      wallet:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /home/wallet/.merge
+
+# Custom bitcoind configuration file used to override default bitcoind settings
+# configurationFile:
+#   bitcoin.conf: |-
+#     server=1
+#     printtoconsole=1
+#     rpcuser=rpcuser
+#     rpcpassword=rpcpassword
