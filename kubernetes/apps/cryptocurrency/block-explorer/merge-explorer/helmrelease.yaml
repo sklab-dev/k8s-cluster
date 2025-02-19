@@ -27,8 +27,9 @@ spec:
   uninstall:
     keepHistory: false  
   values:
-    imagePullSecrets:
-      - name: merge-explorer-ghcr-secret
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: merge-explorer-ghcr-secret
     controllers:
       main:
         annotations:
@@ -38,7 +39,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sklab-dev/block-explorer
-              tag: latest
+              # tag: latest
             env:
               TZ: "${CONFIG_TZ}"
             envFrom:
