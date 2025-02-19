@@ -38,7 +38,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sklab-dev/block-explorer
-              # tag: latest
+              tag: latest
             env:
               TZ: "${CONFIG_TZ}"
             envFrom:
