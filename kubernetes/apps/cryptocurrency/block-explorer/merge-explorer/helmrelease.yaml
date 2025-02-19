@@ -34,7 +34,6 @@ spec:
       main:
         annotations:
           secret.reloader.stakater.com/reload: "merge-explorer-secret,merge-explorer-ghcr-secret"
-          
         containers:
           main:
             image:
