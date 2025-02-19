@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app merge-explorer
+  # labels:
+  #   nginx.ingress.home.arpa/type: auth-external-only
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false  
+  values:
+    imagePullSecrets:
+      - name: merge-explorer-ghcr-secret
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: "merge-explorer-secret,merge-explorer-ghcr-secret"
+          
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sklab-dev/block-explorer
+              tag: latest
+            env:
+              TZ: "${CONFIG_TZ}"
+            envFrom:
+              - secretRef:
+                  name: merge-explorer-secret 
+            command: []
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 500Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 3000
+
+    # persistence:
+    #   wallet:
+    #     enabled: true
+    #     existingClaim: *app
+    #     globalMounts:
+    #       - path: /home/wallet/.merge
+
+# Custom bitcoind configuration file used to override default bitcoind settings
+# configurationFile:
+#   bitcoin.conf: |-
+#     server=1
+#     printtoconsole=1
+#     rpcuser=rpcuser
+#     rpcpassword=rpcpassword
