@@ -76,7 +76,7 @@ spec:
       explorer-settings:
         enabled: true
         type: secret
-        name: merge-explorer-settings
+        name: merge-explorer-secret
         globalMounts:
           - path: /explorer/settings.json
             subPath: settings.json
