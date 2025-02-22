@@ -56,7 +56,7 @@ spec:
               CRONTASK_3: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_peers.lockfile /usr/local/bin/nodejs scripts/peers.js > /dev/null 2>&1"
               CRONTASK_4: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_masternoddes.lockfile /usr/local/bin/nodejs scripts/masternodes.js market > /dev/null 2>&1"
               CRONTASK_1: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_index.lockfile /usr/local/bin/nodejs scripts/sync.js index update > /dev/null 2>&1"
-              CRONTASK_5: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_masternoddes.lockfile /usr/local/bin/nodejs scripts/market.js update > /dev/null 2>&1"
+              CRONTASK_5: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_markets.lockfile /usr/local/bin/nodejs scripts/market.js update > /dev/null 2>&1"
               CRONTASK_6: "0 */1 * * * root rm /explorer/tmp/index.pid &&  rm /explorer/tmp/peers.pid &&  rm /explorer/tmp/masternode.pid > /dev/null 2>&1"
             command: []
             resources:
