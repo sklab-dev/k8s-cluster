@@ -35,7 +35,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sklab-dev/merge-wallet
-              tag: 1.0.3@sha256:8e9720553f8e2d03908172f9b3dea965d5ca07d736dfe58e61c6451a83b8f10f
+              tag: 1.0.5@sha256:610b102736bd990a2e51d285d21c627688e2d1445407b39f6213ff4170a18863
             env:
               TZ: "${CONFIG_TZ}"
             envFrom:
