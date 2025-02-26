@@ -82,7 +82,19 @@ spec:
         runAsGroup: 65534
         seccompProfile: { type: RuntimeDefault }
     service:
-      app:
+      app:     
+        controller: ferretdb
+        ports:
+          mongo:
+            enabled: true
+            port: 27017
+            protocol: TCP
+            appProtocol: mongodb
+      lb:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: "ferretdb.${SECRET_DOMAIN}"
+          lbipam.cilium.io/ips: 10.10.0.155  
+        type: LoadBalancer
         controller: ferretdb
         ports:
           mongo:
