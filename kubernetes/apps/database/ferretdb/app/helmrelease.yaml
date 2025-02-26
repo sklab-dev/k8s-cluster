@@ -93,7 +93,7 @@ spec:
       lb:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "ferretdb.${SECRET_DOMAIN}"
-          lbipam.cilium.io/ips: 10.10.0.155  
+          lbipam.cilium.io/ips: 10.10.0.156  
         type: LoadBalancer
         controller: ferretdb
         ports:
