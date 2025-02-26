@@ -84,7 +84,23 @@ spec:
             port: 5521
           blockchain:
             port: 52000
-
+      lb:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: "merge-wallet.${SECRET_DOMAIN}"
+          lbipam.cilium.io/ips: 10.10.0.157  
+        type: LoadBalancer
+        controller: main
+        ports:
+          rpc:
+            enabled: true
+            port: 5521
+            protocol: TCP
+            targetPort: 5521
+          blockchain:
+            enabled: true
+            port: 52000
+            protocol: TCP
+            targetPort: 52000
     persistence:
       wallet:
         enabled: true
