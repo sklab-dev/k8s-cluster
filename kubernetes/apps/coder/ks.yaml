@@ -17,7 +17,7 @@ spec:
     - name: volsync
       namespace: flux-system
     - name: external-secrets-stores
-      namespace: external-secrets
+      namespace: flux-system
   interval: 30m
   path: ./kubernetes/apps/coder/app
   postBuild:
