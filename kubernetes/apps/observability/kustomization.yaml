@@ -11,6 +11,7 @@ resources:
   - ./prometheus-operator-crds/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./promtail/ks.yaml
+  - ./runbook-viewer/ks.yaml
   - ./unpoller/ks.yaml
   - ./kromgo/ks.yaml
   - ./gatus/ks.yaml
