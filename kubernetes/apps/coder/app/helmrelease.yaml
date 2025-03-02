@@ -84,6 +84,8 @@ spec:
           value: "true"
         - name: CODER_PROMETHEUS_COLLECT_AGENT_STATS
           value: "true"
+        - name: CODER_PROMETHEUS_ADDRESS 
+          value: "0.0.0.0:2112"
         - name: CODER_TELEMETRY_ENABLE
           value: "false"
         - name: CODER_WILDCARD_ACCESS_URL
