@@ -28,8 +28,7 @@ spec:
     podAnnotations:
       secret.reloader.stakater.com/reload: *app
     coder:
-      image:
-        initContainers:
+      initContainers:
           # Create the Postgres Database
           - name: init-db
             image:
