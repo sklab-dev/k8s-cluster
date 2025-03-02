@@ -94,9 +94,9 @@ spec:
           value: "false"
 
       service:
-        loadBalancerIP: 10.10.0.160
+        loadBalancerIP: 10.10.0.158
         annotations:
-          io.cilium/lb-ipam-ips: 10.10.0.160
+          io.cilium/lb-ipam-ips: 10.10.0.158
       ingress:
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
