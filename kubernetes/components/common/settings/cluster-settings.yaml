@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-settings
+data:
+  CONFIG_TIMEZONE: America/New_York
+  CONFIG_NAS_IPV4_ADDRESS: 10.10.0.40 
+  SETTING_EXAMPLE: Global settings for your cluster go in this file, this file is NOT encrypted
