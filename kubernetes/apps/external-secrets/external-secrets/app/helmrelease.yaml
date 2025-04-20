@@ -362,7 +362,7 @@ spec:
 
         service:
           # -- Enable if you use another monitoring tool than Prometheus to scrape the metrics
-          enabled: false
+          enabled: true
 
           # -- Metrics service port to scrape
           port: 8080
