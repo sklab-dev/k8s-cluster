@@ -6,7 +6,7 @@ metadata:
   name: &appname n8n
   namespace: &namespace flux-system
 spec:
-  targetNamespace: *namespace
+  targetNamespace: services
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
