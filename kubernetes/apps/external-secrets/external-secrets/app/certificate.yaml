@@ -21,4 +21,3 @@ spec:
   issuerRef:
     name: bitwarden-certificate-issuer
     kind: ClusterIssuer
-    group: cert-manager.io
