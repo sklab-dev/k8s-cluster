@@ -1,0 +1,41 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname n8n
+  namespace: &namespace services
+spec:
+  targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  interval: 30m
+  timeout: 5m
+  path: "./kubernetes/apps/services/n8n/app"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  wait: false
+  dependsOn:
+    - name: external-secrets-stores
+      namespace: flux-system
+    - name: volsync
+      namespace: flux-system
+  components:
+    - ../../../components/common
+    - ../../../components/gatus/guarded
+    - ../../../components/volsync
+  postBuild:
+    substitute:
+      APP: *appname
+      APP_UID: "1000"
+      APP_GID: "1000"
+      VOLSYNC_CAPACITY: 5Gi
+      GATUS_SUBDOMAIN: services
+      VOLSYNC_CLAIM: *appname
+      VOLSYNC_CACHE_CAPACITY: 1Gi
+      VOLSYNC_STORAGECLASS: ceph-block
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-blockpool
