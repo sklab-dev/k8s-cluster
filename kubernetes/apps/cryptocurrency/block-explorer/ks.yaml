@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: ferretdb
+    - name: mongodb
     - name: merge-wallet
     - name: ingress-nginx-external
   path: ./kubernetes/apps/cryptocurrency/block-explorer/merge-explorer
