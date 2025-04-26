@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: descheduler
+  name: &app_name descheduler
 spec:
   interval: 30m
   chart:
@@ -36,6 +36,18 @@ spec:
                 evictLocalStoragePods: true
                 evictSystemCriticalPods: true
                 nodeFit: true
+            - name: RemoveFailedPods
+              args:
+                reasons:
+                  - ContainerStatusUnknown
+                  - NodeAffinity
+                  - NodeShutdown
+                  - Terminated
+                  - UnexpectedAdmissionError
+                includingInitContainers: true
+                excludeOwnerKinds:
+                  - Job
+                minPodLifetimeSeconds: 1800
             - name: RemovePodsViolatingInterPodAntiAffinity
             - name: RemovePodsViolatingNodeAffinity
               args:
@@ -47,18 +59,68 @@ spec:
                 constraints:
                   - DoNotSchedule
                   - ScheduleAnyway
+
           plugins:
             balance:
               enabled:
                 - RemovePodsViolatingTopologySpreadConstraint
             deschedule:
               enabled:
+                - RemoveFailedPods
                 - RemovePodsViolatingInterPodAntiAffinity
                 - RemovePodsViolatingNodeAffinity
                 - RemovePodsViolatingNodeTaints
+        - name: replicated-pods
+          plugins:
+            deschedule:
+              enabled:
+                - RemovePodsViolatingInterPodAntiAffinity
+                - RemovePodsViolatingNodeAffinity
+                - RemovePodsViolatingNodeTaints
+            balance:
+              enabled:
+                - RemoveDuplicates
+                - LowNodeUtilization
+                - RemovePodsViolatingTopologySpreadConstraint
+          pluginConfig:
+            - name: DefaultEvictor
+              args:
+                evictLocalStoragePods: true
+                evictSystemCriticalPods: true
+                evictFailedBarePods: true
+                nodeFit: true
+                minReplicas: 1
+            - name: RemoveDuplicates
+            - name: LowNodeUtilization
+              args:
+                thresholds:
+                  cpu: 30 # Adjusted for better utilization
+                  memory: 30
+                  pods: 30
+                targetThresholds:
+                  cpu: 70
+                  memory: 70
+                  pods: 70
+            - name: RemovePodsViolatingInterPodAntiAffinity
+            - name: RemovePodsViolatingNodeAffinity
+              args:
+                nodeAffinityType:
+                  - preferredDuringSchedulingIgnoredDuringExecution
+                  - requiredDuringSchedulingIgnoredDuringExecution
+            - name: RemovePodsViolatingNodeTaints
+            - name: RemovePodsViolatingTopologySpreadConstraint
+              args:
+                topologyBalanceNodeFit: true
     service:
       enabled: true
     serviceMonitor:
       enabled: true
     leaderElection:
       enabled: true
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: *app_name
+        whenUnsatisfiable: DoNotSchedule
