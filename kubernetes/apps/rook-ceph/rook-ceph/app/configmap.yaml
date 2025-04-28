@@ -26,6 +26,7 @@ data:
         "nfs": {
           "netNamespaceFilePath": ""
         },
+        "rgw-endpoint": "http://s3.${SECRET_DOMAIN}:7480",
         "readAffinity": {
           "enabled": false,
           "crushLocationLabels": [
