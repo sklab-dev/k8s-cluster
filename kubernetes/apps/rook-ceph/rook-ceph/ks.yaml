@@ -58,6 +58,7 @@ spec:
   path: ./kubernetes/apps/rook-ceph/rook-ceph/claims
   dependsOn:
     - name: rook-ceph-cluster
+      namespace: flux-system
   prune: false # never should be deleted
   sourceRef:
     kind: GitRepository
