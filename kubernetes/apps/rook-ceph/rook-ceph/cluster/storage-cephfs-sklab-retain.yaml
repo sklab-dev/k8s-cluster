@@ -3,9 +3,6 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: cephfs-sklab-retain
-  labels:
-    app.kubernetes.io/name: rook-ceph-cluster
-    kustomize.toolkit.fluxcd.io/name: rook-ceph-cluster
 provisioner: rook-ceph.cephfs.csi.ceph.com
 parameters:
   clusterID: rook-ceph-external
