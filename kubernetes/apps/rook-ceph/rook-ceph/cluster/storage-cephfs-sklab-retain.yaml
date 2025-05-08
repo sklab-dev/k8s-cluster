@@ -1,0 +1,24 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cephfs-sklab-retain
+  labels:
+    app.kubernetes.io/name: rook-ceph-cluster
+    kustomize.toolkit.fluxcd.io/name: rook-ceph-cluster
+provisioner: rook-ceph.cephfs.csi.ceph.com
+parameters:
+  clusterID: rook-ceph-external
+  fsName: sklab
+  pool: sklab_data
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+  csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+mountOptions:
+  - discard
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: Immediate

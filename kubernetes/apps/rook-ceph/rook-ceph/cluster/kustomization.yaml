@@ -9,3 +9,5 @@ resources:
   - ./storage_ceph-block.yaml
   - ./storage_ceph-objects.yaml
   - ./snapshot.yaml
+  - ./storage-cephfs-sklab.yaml
+  - ./storage-cephfs-sklab-retain.yaml
