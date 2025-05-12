@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: cephfs-sklab-retain
+  resources:
+    requests:
+      storage: 500Gi
