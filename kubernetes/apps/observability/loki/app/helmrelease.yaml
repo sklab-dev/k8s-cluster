@@ -71,14 +71,11 @@ spec:
             # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
             nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
             nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-        className: internal
+        ingressClassName: internal
         hosts:
           - host: "loki.${SECRET_DOMAIN}"
             paths:
               - path: /
-                service:
-                  identifier: loki-gateway
-                  port: http
     backend:
       replicas: 0
     read:
