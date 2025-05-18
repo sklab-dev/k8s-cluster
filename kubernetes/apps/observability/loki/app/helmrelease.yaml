@@ -73,9 +73,12 @@ spec:
             nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
         className: internal
         hosts:
-          - host: loki.${SECRET_DOMAIN}
+          - host: "loki.${SECRET_DOMAIN}"
             paths:
-              - /
+              - path: /
+                service:
+                  identifier: loki-gateway
+                  port: http
     backend:
       replicas: 0
     read:
