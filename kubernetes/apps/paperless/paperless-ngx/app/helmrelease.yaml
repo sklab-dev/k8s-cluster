@@ -126,7 +126,7 @@ spec:
           main:
             image:
               repository: "docker.io/gotenberg/gotenberg"
-              tag: "8.17.3@sha256:779d4cf9bb36cb645e26e03fdb1b929b5d0fd01bfa58c336da5e224dd154626e"
+              tag: "8.21.0@sha256:8ccd9b57b537a92bba778a49a0c7a8367c61927170e632840fe8a056c4702d9f"
             command: ["gotenberg", "--chromium-disable-javascript=true", "--api-timeout=180s", --chromium-allow-list=file:///tmp/.*", "--libreoffice-start-timeout=180s"]
             resources: # TODO: adjust (Go app)
               requests:
