@@ -29,6 +29,6 @@ spec:
     kind: GitRepository
     name: home-kubernetes
     namespace: flux-system
-  targetNamespace: flux-system
+  targetNamespace: coder
   timeout: 5m
   wait: true
