@@ -9,5 +9,4 @@ components:
   - ../../components/sops
 resources:
   - ./flux-operator/ks.yaml
-  - ./addons/ks.yaml
 
