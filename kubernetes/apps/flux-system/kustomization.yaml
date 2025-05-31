@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: flux-system
 components:
   - ../../components/namespace
+  - ../../components/global-vars
   - ../../components/sops
 resources:
   - ./flux-operator/ks.yaml
