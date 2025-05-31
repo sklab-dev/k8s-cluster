@@ -13,7 +13,7 @@ apk add --no-cache \
 
 apk add --no-cache \
     --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        cloudflared cilium-cli helmfile kubeconform kubectl-krew lsd stern
+        cloudflared cilium-cli helmfile kubeconform kubectl-krew stern
 
 for app in \
     "budimanjojo/talhelper!!?as=talhelper&type=script" \
