@@ -22,7 +22,7 @@ spec:
   wait: false
   patches:
     - # Add Sops decryption to child Kustomizations
-      patch: |-
+    - patch: |-
         apiVersion: kustomize.toolkit.fluxcd.io/v1
         kind: Kustomization
         metadata:
@@ -32,6 +32,10 @@ spec:
             provider: sops
             secretRef:
               name: sops-age
+          postBuild:
+            substituteFrom:
+              - kind: ConfigMap
+                name: cluster-settings
       target:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
@@ -39,5 +43,5 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-settings
-      - kind: Secret
-        name: cluster-secrets
+      # - kind: Secret
+      #   name: cluster-secrets
