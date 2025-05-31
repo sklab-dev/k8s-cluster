@@ -40,5 +40,6 @@
           "system-upgrade": "update",
           "tools": "tools",
           "volsync": "aws"
-      },
+    },
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
 }
