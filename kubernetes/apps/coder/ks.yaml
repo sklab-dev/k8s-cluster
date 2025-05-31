@@ -27,7 +27,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
     namespace: flux-system
   targetNamespace: coder
   timeout: 5m

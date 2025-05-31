@@ -10,7 +10,8 @@ spec:
   targetNamespace: security
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
+    namespace: flux-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
