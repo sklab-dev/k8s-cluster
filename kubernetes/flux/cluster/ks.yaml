@@ -10,6 +10,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+      namespace: flux-system
   interval: 1h
   path: ./kubernetes/apps
   prune: true
@@ -32,6 +33,7 @@ spec:
             provider: sops
             secretRef:
               name: sops-age
+              namespace: flux-system
           postBuild:
             substituteFrom:
               - kind: ConfigMap
