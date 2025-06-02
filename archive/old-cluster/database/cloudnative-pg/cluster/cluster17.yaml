@@ -12,7 +12,7 @@ spec:
   # - supervised: requires manual supervision to perform
   #               the switchover of the primary
   primaryUpdateStrategy: unsupervised
-  
+
   # Storage configuration
   storage:
     size: 20Gi
@@ -34,7 +34,7 @@ spec:
     parameters:
       max_connections: "250"
       shared_buffers: 128MB
-  
+
   # Pod affinity Rules
   affinity:
     enablePodAntiAffinity: true
@@ -60,7 +60,7 @@ spec:
       - { sourceLabels: [ "cluster" ], targetLabel: cnpg_cluster, action: replace }
       - { regex: cluster, action: labeldrop }
 
-  # Backup Configuration  
+  # Backup Configuration
   backup:
     retentionPolicy: 30d
     barmanObjectStore: &barmanObjectStore
@@ -85,7 +85,7 @@ spec:
 
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
-    - name: *previousCluster 
+    - name: *previousCluster
       barmanObjectStore:
         <<: *barmanObjectStore
         serverName: *previousCluster

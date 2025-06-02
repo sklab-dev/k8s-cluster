@@ -35,7 +35,7 @@ spec:
   issuerRef:
     name: bitwarden-bootstrap-issuer
     kind: ClusterIssuer
-    group: cert-manager.io    
+    group: cert-manager.io
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cert-manager.io/clusterissuer_v1.json
 apiVersion: cert-manager.io/v1

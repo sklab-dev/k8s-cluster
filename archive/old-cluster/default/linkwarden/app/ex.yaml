@@ -55,4 +55,3 @@ spec:
         key: linkwarden
     - extract:
         key: cloudnative-pg
-

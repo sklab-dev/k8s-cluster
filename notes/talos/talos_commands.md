@@ -10,9 +10,9 @@ talosctl apply-config --talosconfig=/workspaces/k8s.sklab.dev/kubernetes/bootstr
 
 talhelper gencommand apply --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig --extra-flags="--insecure" | bash
 
-talhelper gencommand bootstrap --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig 
+talhelper gencommand bootstrap --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig
 
-talosctl reset --nodes 10.10.0.83 --graceful=false --reboot 
+talosctl reset --nodes 10.10.0.83 --graceful=false --reboot
 
 ############################
 #   Brings node in Maint  #
@@ -31,20 +31,20 @@ talhelper gencommand apply --config-file /workspaces/k8s.sklab.dev/kubernetes/bo
 talhelper gencommand apply --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig --extra-flags="--insecure" | bash
 
 ############################
-#     Bootstrap Node       #   
+#     Bootstrap Node       #  
 ############################
 
 # create the cluster bootstrap commnad
-talhelper gencommand bootstrap --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig 
+talhelper gencommand bootstrap --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig
 -> talosctl bootstrap --talosconfig=/workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig/talosconfig --nodes=10.10.0.81;
 
-# Can be pipelined and awaited 
+# Can be pipelined and awaited
 until talhelper gencommand bootstrap --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig | bash; do sleep 10; done
 
 ############################
 #   Bootstrap k8s Cluster  #
 ############################
-# ROOT_DIR	The absolute path of the root Taskfile directory.
+# ROOT_DIR  The absolute path of the root Taskfile directory.
 
 talhelper gencommand kubeconfig --config-file /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/talconfig.yaml --out-dir /workspaces/k8s.sklab.dev/kubernetes/bootstrap/talos/clusterconfig --extra-flags="{{.ROOT_DIR}} --force"
 

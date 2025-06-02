@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./scrapeconfig.yaml
 configMapGenerator:
-  - name: truenas-restic-dashboard 
+  - name: truenas-restic-dashboard
     files:
       - truenas-restic-dashboard.json
 generatorOptions:

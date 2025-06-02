@@ -8,7 +8,7 @@ metadata:
     release: prometheus-stack # required since prometheus.prometheusSpec.scrapeConfigsSelectorNilUsesHelmValues is true (default) and prometheus.prometheusSpec.scrapeConfigsSelector is not set (default). I got this label from the prometheus-stack operator labels, so check yours to ensure it's correct.
 spec:
   staticConfigs:
-    - targets: 
+    - targets:
         - prox-1.cluster.sklab.dev:9283
         - prox-2.cluster.sklab.dev:9283
         - prox-3.cluster.sklab.dev:9283

@@ -13,8 +13,8 @@ CNI Chaining:            none
 CNI Config file:         successfully wrote CNI configuration file to /host/etc/cni/net.d/05-cilium.conflist
 Cilium:                  Ok   1.16.5 (v1.16.5-ad688277)
 NodeMonitor:             Listening for events on 10 CPUs with 64x4096 of shared memory
-Cilium health daemon:    Ok   
-IPAM:                    IPv4: 21/254 allocated from 10.69.3.0/24, 
+Cilium health daemon:    Ok  
+IPAM:                    IPv4: 21/254 allocated from 10.69.3.0/24,
 ClusterMesh:             0/0 remote clusters ready, 0 global-services
 IPv4 BIG TCP:            Disabled
 IPv6 BIG TCP:            Disabled
@@ -27,7 +27,7 @@ Controller Status:       130/130 healthy
 Proxy Status:            OK, ip 10.69.3.39, 0 redirects active on ports 10000-20000, Envoy: embedded
 Global Identity Range:   min 65536, max 131071
 Hubble:                  Ok              Current/Max Flows: 4095/4095 (100.00%), Flows/s: 56.10   Metrics: Ok
-Encryption:              Disabled        
+Encryption:              Disabled  
 Cluster health:          3/3 reachable   (2024-12-23T23:27:27Z)
 Modules Health:          Stopped(0) Degraded(0) OK(105)
 ```

@@ -90,7 +90,7 @@ spec:
                   initialDelaySeconds: 0
                   timeoutSeconds: 1
                   failureThreshold: 10
-                  periodSeconds: 12   
+                  periodSeconds: 12
       redis:
         containers:
           redis:
@@ -118,7 +118,7 @@ spec:
                 memory: "256Mi"
               limits:
                 cpu: "3000m"
-                memory: "6000Mi"    
+                memory: "6000Mi"
       gotenberg:
         type: deployment
         replicas: 1
@@ -134,7 +134,7 @@ spec:
                 memory: "128Mi"
               limits:
                 cpu: "4000m"
-                memory: "6000Mi"    
+                memory: "6000Mi"
     service:
       paperless:
         controller: paperless

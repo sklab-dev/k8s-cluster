@@ -74,4 +74,3 @@ spec:
             command: ["/home/runner/run.sh"]
   ######################################################################################################
     serviceAccountName: actions-runner
-

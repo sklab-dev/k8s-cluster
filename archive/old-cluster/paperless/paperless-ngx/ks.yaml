@@ -29,7 +29,7 @@ spec:
     # - name: database-dragonfly-cluster
     # - name: security-secret-store
     # - name: storage-democratic-csi-nfs
-    # - name: storage-volsync  
+    # - name: storage-volsync
   postBuild:
     substitute:
       APP: *app

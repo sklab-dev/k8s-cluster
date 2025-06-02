@@ -35,10 +35,10 @@ spec:
     controllers:
       linkwarden:
         annotations:
-          reloader.stakater.com/auto: "true"        
+          reloader.stakater.com/auto: "true"
         initContainers:
           init-postgres:
-            image: 
+            image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16.8
             envFrom:
@@ -99,4 +99,3 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /data/.next/cache
-

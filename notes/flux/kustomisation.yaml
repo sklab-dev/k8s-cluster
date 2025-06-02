@@ -17,7 +17,7 @@ spec:
     labels:
       # Label to identify the application
       app.kubernetes.io/name: *app
-  
+
   dependsOn:
     - name: external-secrets-stores
 

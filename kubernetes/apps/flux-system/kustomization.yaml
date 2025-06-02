@@ -9,4 +9,3 @@ components:
   - ../../components/sops           # Adds SOPS decryption config
 resources:
   - ./flux-operator/ks.yaml
-

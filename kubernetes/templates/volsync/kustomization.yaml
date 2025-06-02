@@ -7,4 +7,3 @@ resources:
   - ./nfs
   - ./r2
   - ./pvc.yaml
-

@@ -7,4 +7,3 @@ resources:
   - ./externalsecret.yaml
   - ./../../../../templates/gatus/guarded
   - ./../../../../templates/volsync
-

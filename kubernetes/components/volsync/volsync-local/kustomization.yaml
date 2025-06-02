@@ -6,4 +6,3 @@ resources:
   - ./minio
   - ./nfs
   - ./pvc.yaml
-

@@ -1,8 +1,8 @@
 
-To get the Current Kernel parameter 
+To get the Current Kernel parameter
 
 ```
-network/echo-server/app on  main via 🐍 v3.12.7 (.venv) 
+network/echo-server/app on  main via 🐍 v3.12.7 (.venv)
 ⬢ [podman] ❯ talosctl get kpds -n Talos-1
 NODE      NAMESPACE   TYPE                     ID                                             VERSION
 Talos-1   runtime     KernelParamDefaultSpec   proc.sys.fs.aio-max-nr                         1
@@ -28,7 +28,7 @@ Talos-1   runtime     KernelParamDefaultSpec   proc.sys.vm.overcommit_memory    
 
 
 ```
-network/echo-server/app on  main via 🐍 v3.12.7 (.venv) 
+network/echo-server/app on  main via 🐍 v3.12.7 (.venv)
 ⬢ [podman] ❯ talosctl get kernelparameters -n Talos-1
 NODE      NAMESPACE   TYPE                ID                                             VERSION   CURRENT   DEFAULT   UNSUPPORTED
 Talos-1   runtime     KernelParamStatus   proc.sys.fs.aio-max-nr                         1         1048576   65536     false

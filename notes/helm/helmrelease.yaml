@@ -29,7 +29,7 @@ spec:
   maxHistory: 3
   # This section defines the behavior during the installation of the Helm chart
   install:
-    # This field indicates that Helm should create the namespace specified in the HelmRelease if it does not already exist. 
+    # This field indicates that Helm should create the namespace specified in the HelmRelease if it does not already exist.
     createNamespace: true
     # This subsection specifies the remediation strategy if the installation fails
     remediation:

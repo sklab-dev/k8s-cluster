@@ -6,4 +6,3 @@ resources:
   - externalsecrets.yaml
   - helmrelease.yaml
   - ./../../../../templates/volsync-local
-

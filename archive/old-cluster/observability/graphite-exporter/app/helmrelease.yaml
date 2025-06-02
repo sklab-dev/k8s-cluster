@@ -83,7 +83,7 @@ spec:
             port: 2003
           metrics:
             port: 9108
-            
+
     serviceMonitor:
       app:
         serviceName: graphite-exporter

@@ -28,7 +28,7 @@ spec:
       reloader.stakater.com/auto: "true"
     persistence:
       existingClaim: *app
-      
+
     auth:
       enabled: true
       rootUser: "root"

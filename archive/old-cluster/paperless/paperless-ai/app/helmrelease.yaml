@@ -68,7 +68,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: AI
           gethomepage.dev/name: Paperless AI
-          gethomepage.dev/icon: si-paperlessngx    
+          gethomepage.dev/icon: si-paperlessngx
         hosts:
           - host: ${HOSTNAME}
             paths:

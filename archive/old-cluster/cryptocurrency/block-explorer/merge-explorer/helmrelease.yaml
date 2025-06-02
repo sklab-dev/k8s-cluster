@@ -25,7 +25,7 @@ spec:
     remediation:
       retries: 3
   uninstall:
-    keepHistory: false  
+    keepHistory: false
   values:
     defaultPodOptions:
       imagePullSecrets:
@@ -45,12 +45,12 @@ spec:
               PM2_SECRET_KEY:
                 valueFrom:
                   secretKeyRef:
-                    name: merge-explorer-secret 
+                    name: merge-explorer-secret
                     key: PM2_SECRET_KEY
               PM2_PUBLIC_KEY:
                 valueFrom:
                   secretKeyRef:
-                    name: merge-explorer-secret 
+                    name: merge-explorer-secret
                     key: PM2_PUBLIC_KEY
               CRONTASK_2: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_market.lockfile /usr/local/bin/nodejs scripts/sync.js market > /dev/null 2>&1"
               CRONTASK_3: "* * * * * root cd /explorer && /usr/bin/flock -n /tmp/sync_peers.lockfile /usr/local/bin/nodejs scripts/peers.js > /dev/null 2>&1"

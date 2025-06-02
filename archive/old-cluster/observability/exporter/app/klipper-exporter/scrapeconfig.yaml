@@ -16,7 +16,7 @@ spec:
   scheme: HTTP
   scrapeInterval: 10s
   params:
-    modules: [ 
+    modules: [
             'process_stats',
             'network_stats',
             'system_info',
@@ -26,11 +26,10 @@ spec:
             'history',
             'spoolman',
           ]
-  relabelings: 
+  relabelings:
       - sourceLabels: [__address__]
         targetLabel: __param_target
       - sourceLabels: [__param_target]
         targetLabel: instance
       - targetLabel: __address__
         replacement: klipper-exporter.observability.svc.cluster.local # host where the klipper-exporter is running
-      

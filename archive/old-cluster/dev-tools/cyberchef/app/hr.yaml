@@ -24,7 +24,7 @@ spec:
     remediation:
       retries: 3
   uninstall:
-    keepHistory: false  
+    keepHistory: false
 
   values:
     automountServiceAccountToken: false
@@ -69,7 +69,7 @@ spec:
                 service:
                   identifier: main
                   port: *port
-  
+
     # podSecurityContext:
     #   runAsUser: &uid ${APP_UID_CYBERCHEF:=1000}
     #   runAsGroup: *uid

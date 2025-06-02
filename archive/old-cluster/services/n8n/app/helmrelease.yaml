@@ -21,7 +21,7 @@ spec:
       n8n:
         initContainers:
           init-postgres:
-            image: 
+            image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16.8
             envFrom: &envFrom
