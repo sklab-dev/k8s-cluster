@@ -17,5 +17,5 @@ spec:
   scrapeInterval: 10s
   params:
     module: [default]
-    cluster: ['1']
-    node: ['1']
+    cluster: ["1"]
+    node: ["1"]

@@ -13,8 +13,8 @@ spec:
         - prox-2.cluster.sklab.dev:9283
         - prox-3.cluster.sklab.dev:9283
       labels:
-        instance: 'ceph_cluster'
-        cluster : 'ceph_cluster'
+        instance: "ceph_cluster"
+        cluster: "ceph_cluster"
   metricsPath: /metrics
   scheme: HTTP
   scrapeInterval: 10s

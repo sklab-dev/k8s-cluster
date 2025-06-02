@@ -55,7 +55,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 10m
@@ -65,13 +65,18 @@ spec:
             image:
               repository: ghcr.io/coder/code-server
               tag: 4.97.2@sha256:6ff0e9cf5a553b3961ece200be75e21e8c887ed0ae28a7c28213722dccf74b0c
-            args: [
-              "--auth", "none",
-              "--user-data-dir", "/config/.vscode",
-              "--extensions-dir", "/config/.vscode",
-              "--port", "12321",
-              "/config"
-            ]
+            args:
+              [
+                "--auth",
+                "none",
+                "--user-data-dir",
+                "/config/.vscode",
+                "--extensions-dir",
+                "/config/.vscode",
+                "--port",
+                "12321",
+                "/config",
+              ]
             resources:
               requests:
                 cpu: 10m
@@ -84,7 +89,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: { type: RuntimeDefault }
+        seccompProfile: {type: RuntimeDefault}
     service:
       app:
         controller: home-assistant
@@ -94,15 +99,15 @@ spec:
           code-server:
             port: 12321
       homebridge:
-          primary: false
-          controller: "home-assistant"
-          type: LoadBalancer
-          annotations:
-            "io.cilium/lb-ipam-ips": "10.40.0.100/16"
-          ports:
-            homekit:
-              port: 21061
-              protocol: TCP
+        primary: false
+        controller: "home-assistant"
+        type: LoadBalancer
+        annotations:
+          "io.cilium/lb-ipam-ips": "10.40.0.100/16"
+        ports:
+          homekit:
+            port: 21061
+            protocol: TCP
 
     ingress:
       app:

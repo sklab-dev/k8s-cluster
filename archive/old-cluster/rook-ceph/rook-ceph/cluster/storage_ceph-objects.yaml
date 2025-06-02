@@ -7,7 +7,7 @@ metadata:
 spec:
   gateway:
     externalRgwEndpoints:
-    - ip: ${SECRET_DOMAIN}   # Adjust this IP if you have a VIP / HAProxy later
+      - ip: ${SECRET_DOMAIN} # Adjust this IP if you have a VIP / HAProxy later
     port: 7480
     securePort: 0
   preservePoolsOnDelete: true

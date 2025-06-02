@@ -1,12 +1,11 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
-version: '3'
+version: "3"
 
 vars:
   KUBECONFORM_SCRIPT: "{{.SCRIPTS_DIR}}/kubeconform.sh"
 
 tasks:
-
   ks-*:
     desc: Apply a Flux KS [PATH=required]
     cmd: >
@@ -18,7 +17,7 @@ tasks:
     requires:
       vars: [PATH]
     vars:
-      OPERATION: '{{index .MATCH 0}}'
+      OPERATION: "{{index .MATCH 0}}"
       KUSTOMIZATION:
         sh: flux --namespace flux-system get kustomizations {{base .PATH}}
     preconditions:
@@ -42,7 +41,7 @@ tasks:
   resources:
     desc: Gather common resources in your cluster, useful when asking for support
     cmds:
-      - for: { var: RESOURCE }
+      - for: {var: RESOURCE}
         cmd: kubectl get {{.ITEM}} {{.CLI_ARGS | default "-A"}}
     vars:
       RESOURCE: >-

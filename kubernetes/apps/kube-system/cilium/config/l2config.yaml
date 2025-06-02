@@ -35,7 +35,6 @@ spec:
     matchExpressions:
       - {key: io.cilium/ippool, operator: NotIn, values: [public]}
 
-
 ---
 # yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliuml2announcementpolicy_v2alpha1.json
 apiVersion: cilium.io/v2alpha1
@@ -49,3 +48,4 @@ spec:
     matchExpressions:
       - {key: somekey, operator: NotIn, values: ["never-used-value"]}
 ---
+

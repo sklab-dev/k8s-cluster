@@ -1,35 +1,37 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
-version: '3'
+version: "3"
 
 set: [pipefail]
 shopt: [globstar]
 
 vars:
-  TALOS_DIR: '{{.ROOT_DIR}}/kubernetes/bootstrap/talos'
+  TALOS_DIR: "{{.ROOT_DIR}}/kubernetes/bootstrap/talos"
   # @todo: adjust once bootstrap  possible
   # BOOTSTRAP_DIR: '{{.ROOT_DIR}}/bootstrap'
-  KUBERNETES_DIR: '{{.ROOT_DIR}}/kubernetes'
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   # @todo: implement when scripts are being used
   # SCRIPTS_DIR: '{{.ROOT_DIR}}/scripts'
-  SOPS_CONFIG_FILE: '{{.ROOT_DIR}}/.sops.yaml'
+  SOPS_CONFIG_FILE: "{{.ROOT_DIR}}/.sops.yaml"
 
 env:
-  KUBECONFIG: '{{.ROOT_DIR}}/kubeconfig'
-  PYTHONDONTWRITEBYTECODE: '1'
-  SOPS_AGE_KEY_FILE: '{{.ROOT_DIR}}/age.key'
-  VIRTUAL_ENV: '{{.ROOT_DIR}}/.venv'
+  KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
+  PYTHONDONTWRITEBYTECODE: "1"
+  SOPS_AGE_KEY_FILE: "{{.ROOT_DIR}}/age.key"
+  VIRTUAL_ENV: "{{.ROOT_DIR}}/.venv"
 
 includes:
   bootstrap: .taskfiles/bootstrap
+  format: .taskfiles/format
   kubernetes: .taskfiles/kubernetes
+  precommit: .taskfiles/precommit
+
   talos: .taskfiles/talos
   user:
     taskfile: .taskfiles/User
     optional: true
 
 tasks:
-
   default:
     cmd: task --list
     silent: true

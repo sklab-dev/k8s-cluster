@@ -1,18 +1,17 @@
 ---
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
-version: '3'
+version: "3"
 
 vars:
-  TALHELPER_CLUSTER_DIR: '{{.KUBERNETES_DIR}}/bootstrap/talos/clusterconfig'
-  TALHELPER_CONFIG_FILE: '{{.KUBERNETES_DIR}}/bootstrap/talos/talconfig.yaml'
-  TALHELPER_SECRET_FILE: '{{.KUBERNETES_DIR}}/bootstrap/talos/talsecret.sops.yaml'
-  TALOSCONFIG: '{{.TALHELPER_CLUSTER_DIR}}/talosconfig'
+  TALHELPER_CLUSTER_DIR: "{{.KUBERNETES_DIR}}/bootstrap/talos/clusterconfig"
+  TALHELPER_CONFIG_FILE: "{{.KUBERNETES_DIR}}/bootstrap/talos/talconfig.yaml"
+  TALHELPER_SECRET_FILE: "{{.KUBERNETES_DIR}}/bootstrap/talos/talsecret.sops.yaml"
+  TALOSCONFIG: "{{.TALHELPER_CLUSTER_DIR}}/talosconfig"
 
 env:
-  TALOSCONFIG: '{{.TALOSCONFIG}}'
+  TALOSCONFIG: "{{.TALOSCONFIG}}"
 
 tasks:
-
   generate-config:
     desc: Generate Talos configuration
     cmd: talhelper genconfig --config-file {{.TALHELPER_CONFIG_FILE}} --secret-file {{.TALHELPER_SECRET_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}}
@@ -153,12 +152,12 @@ tasks:
   apply-cluster:
     desc: Apply Talos config across the whole cluster [CLUSTER=main] [MODE=default]
     cmds:
-      - for: { var: IP_ADDRS }
+      - for: {var: IP_ADDRS}
         task: apply-node
         vars:
-          IP: '{{.ITEM}}'
-          MODE: '{{.MODE}}'
-          CLUSTER: '{{.CLUSTER}}'
+          IP: "{{.ITEM}}"
+          MODE: "{{.MODE}}"
+          CLUSTER: "{{.CLUSTER}}"
     vars:
       MODE: '{{.MODE | default "auto"}}'
       IP_ADDRS:
@@ -168,15 +167,14 @@ tasks:
     preconditions:
       - which jq talosctl
 
-
   upgrade-cluster:
     desc: Upgrade Talos across the whole cluster [CLUSTER=main]
     cmds:
-      - for: { var: IP_ADDRS }
+      - for: {var: IP_ADDRS}
         task: upgrade-node
         vars:
-          IP: '{{.ITEM}}'
-          CLUSTER: '{{.CLUSTER}}'
+          IP: "{{.ITEM}}"
+          CLUSTER: "{{.CLUSTER}}"
     vars:
       IP_ADDRS:
         sh: talosctl config info --output json | jq --join-output '[.nodes[]] | join(" ")'
@@ -188,12 +186,12 @@ tasks:
   reboot-cluster:
     desc: Reboot Talos on a single node [CLUSTER=main] [IP=required] [MODE=default]
     cmds:
-      - for: { var: IP_ADDRS }
+      - for: {var: IP_ADDRS}
         task: reboot-node
         vars:
-          IP: '{{.ITEM}}'
-          MODE: '{{.MODE}}'
-          CLUSTER: '{{.CLUSTER}}'
+          IP: "{{.ITEM}}"
+          MODE: "{{.MODE}}"
+          CLUSTER: "{{.CLUSTER}}"
     vars:
       IP_ADDRS:
         sh: talosctl config info --output json | jq --join-output '[.nodes[]] | join(" ")'

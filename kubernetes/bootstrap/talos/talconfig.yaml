@@ -128,7 +128,6 @@ patches:
   - "@./patches/global/machine-sysctl.yaml"
   - "@./patches/global/machine-time.yaml"
 
-
 # Controller patches
 controlPlane:
   patches:

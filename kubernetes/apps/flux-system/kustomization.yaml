@@ -4,8 +4,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: flux-system
 components:
-  - ../../components/namespace      # Ensures the namespace exists
-  - ../../components/global-vars    # Injects global variables or labels
-  - ../../components/sops           # Adds SOPS decryption config
+  - ../../components/namespace # Ensures the namespace exists
+  - ../../components/global-vars # Injects global variables or labels
+  - ../../components/sops # Adds SOPS decryption config
 resources:
   - ./flux-operator/ks.yaml

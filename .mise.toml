@@ -24,9 +24,11 @@ ANSIBLE_HOST_KEY_CHECKING = "False"
 
 [tools]
 "python" = "3.13"
+"node" = "22"
 "pipx:yamllint" = "1.37.1"
 "pipx:pre-commit" = "4.2.0"
 "pipx:makejinja" = "2.7.2"
+"npm:prettier" = "3.5.3"
 "aqua:budimanjojo/talhelper" = "3.0.28"
 "aqua:cilium/cilium-cli" = "0.18.3"
 "aqua:cli/cli" = "2.74.0"

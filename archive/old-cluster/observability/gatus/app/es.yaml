@@ -22,9 +22,9 @@ spec:
         INIT_POSTGRES_SUPER_PASS: "{{ .password }}"
 
   dataFrom:
-  - extract:
-      key: gatus
-  - extract:
-      key: cloudnative-pg
-  - extract:
-      key: pushover
+    - extract:
+        key: gatus
+    - extract:
+        key: cloudnative-pg
+    - extract:
+        key: pushover

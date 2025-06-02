@@ -45,7 +45,6 @@ spec:
               PAPERLESS_MEDIA_ROOT: &media "/data/media"
               PAPERLESS_TRASH_DIR: &trash "/data/trash"
 
-
               PAPERLESS_OCR_LANGUAGES: eng deu
               PAPERLESS_OCR_LANGUAGE: eng
               PAPERLESS_OCR_USER_ARGS: '{"invalidate_digital_signatures": true}'
@@ -127,7 +126,14 @@ spec:
             image:
               repository: "docker.io/gotenberg/gotenberg"
               tag: "8.17.3@sha256:779d4cf9bb36cb645e26e03fdb1b929b5d0fd01bfa58c336da5e224dd154626e"
-            command: ["gotenberg", "--chromium-disable-javascript=true", "--api-timeout=180s", --chromium-allow-list=file:///tmp/.*", "--libreoffice-start-timeout=180s"]
+            command:
+              [
+                "gotenberg",
+                "--chromium-disable-javascript=true",
+                "--api-timeout=180s",
+                --chromium-allow-list=file:///tmp/.*",
+                "--libreoffice-start-timeout=180s",
+              ]
             resources: # TODO: adjust (Go app)
               requests:
                 cpu: "20m"
@@ -158,7 +164,6 @@ spec:
           gotenberg:
             port: 80
             targetPort: 3000
-
 
     ingress:
       paperless:

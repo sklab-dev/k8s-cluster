@@ -57,8 +57,8 @@ spec:
     # https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
     # Need to change in Grafana dashboards cluster to cnpg_cluster in the Variable Cluster
     podMonitorMetricRelabelings:
-      - { sourceLabels: [ "cluster" ], targetLabel: cnpg_cluster, action: replace }
-      - { regex: cluster, action: labeldrop }
+      - {sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace}
+      - {regex: cluster, action: labeldrop}
 
   # Backup Configuration
   backup:
@@ -81,7 +81,6 @@ spec:
         secretAccessKey:
           name: cloudnative-pg-secret
           key: aws-secret-access-key
-
 
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:

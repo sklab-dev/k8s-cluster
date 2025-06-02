@@ -14,6 +14,6 @@ spec:
       port: 27017
       targetPort: mongodb
   selector:
-      app.kubernetes.io/component: mongodb
-      app.kubernetes.io/instance: mongodb
-      app.kubernetes.io/name: mongodb
+    app.kubernetes.io/component: mongodb
+    app.kubernetes.io/instance: mongodb
+    app.kubernetes.io/name: mongodb
