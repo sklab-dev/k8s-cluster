@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/source.toolkit.fluxcd.io/ocirepository_v1beta2.json
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: cert-manager
+spec:
+  interval: 1h
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+  ref:
+    tag: v1.17.2
+  url: oci://quay.io/jetstack/charts/cert-manager
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: cert-manager
+  interval: 30m
+  install:
+    crds: CreateReplace
+  maxHistory: 3
+  upgrade:
+    crds: CreateReplace
+  uninstall:
+    keepHistory: false
+  valuesFrom:
+    - kind: ConfigMap
+      name: cert-manager-values

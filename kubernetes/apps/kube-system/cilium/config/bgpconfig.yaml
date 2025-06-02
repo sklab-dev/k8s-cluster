@@ -1,0 +1,83 @@
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumbgpclusterconfig_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPClusterConfig
+metadata:
+  name: l3-bgp-cluster-config
+spec:
+  nodeSelector:
+    matchExpressions:
+      - {key: somekey, operator: NotIn, values: ["never-used-value"]}
+      # - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: [""]}
+  bgpInstances:
+    - name: cilium
+      localASN: 64514
+      peers:
+        - name: gateway
+          peerASN: 64513
+          peerAddress: 10.0.1.1
+          peerConfigRef:
+            name: l3-bgp-peer-config
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumbgppeerconfig_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPPeerConfig
+metadata:
+  name: l3-bgp-peer-config
+spec:
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"
+  gracefulRestart:
+    enabled: true
+    restartTimeSeconds: 30
+  timers:
+    connectRetryTimeSeconds: 12
+    holdTimeSeconds: 9
+    keepAliveTimeSeconds: 3
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumbgpadvertisement_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPAdvertisement
+metadata:
+  name: l3-bgp-advertisement
+  labels:
+    advertise: bgp
+spec:
+  advertisements:
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
+      selector:
+        matchExpressions:
+          - {key: somekey, operator: NotIn, values: ["never-used-value"]}
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumloadbalancerippool_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: bgp-pool-public
+spec:
+  allowFirstLastIPs: "No"
+  blocks:
+    - cidr: ${CONFIG_BGP_PUBLIC_POOL_CIDR}
+  serviceSelector:
+    matchExpressions:
+      - {key: io.cilium/ippool, operator: In, values: [public]}
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumloadbalancerippool_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: bgp-pool-private
+spec:
+  allowFirstLastIPs: "No"
+  blocks:
+    - cidr: ${CONFIG_BGP_PRIVATE_POOL_CIDR}
+  serviceSelector:
+    matchExpressions:
+      - {key: io.cilium/ippool, operator: NotIn, values: [public]}

@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliuml2announcementpolicy_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: cilium-l2
+spec:
+  loadBalancerIPs: true
+  interfaces: ["^eth.*"]
+  nodeSelector:
+    matchExpressions:
+      - {key: somekey, operator: NotIn, values: ["never-used-value"]}
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumloadbalancerippool_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: l2-pool-public
+spec:
+  blocks:
+    - cidr: ${CONFIG_L2_POOL_PUBLIC_CIDR}
+  serviceSelector:
+    matchExpressions:
+      - {key: io.cilium/ippool, operator: In, values: [public]}
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliumloadbalancerippool_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: l2-pool-private
+spec:
+  blocks:
+    - cidr: ${CONFIG_L2_POOL_PRIVATE_CIDR}
+  serviceSelector:
+    matchExpressions:
+      - {key: io.cilium/ippool, operator: NotIn, values: [public]}
+
+
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cilium.io/ciliuml2announcementpolicy_v2alpha1.json
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: cilium-l2
+spec:
+  loadBalancerIPs: true
+  interfaces: ["^eth.*"]
+  nodeSelector:
+    matchExpressions:
+      - {key: somekey, operator: NotIn, values: ["never-used-value"]}
+---

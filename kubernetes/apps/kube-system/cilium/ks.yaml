@@ -1,42 +1,43 @@
 ---
+# yaml-language-server: $schema=https://crd.movishell.pl/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cilium
-  namespace: flux-system
+  namespace: &namespace kube-system
 spec:
-  targetNamespace: kube-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  interval: 30m
   path: ./kubernetes/apps/kube-system/cilium/app
-  prune: false # never should be deleted
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+  targetNamespace: *namespace
   wait: true
-  interval: 30m
-  timeout: 5m
 ---
+# yaml-language-server: $schema=https://crd.movishell.pl/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cilium-config
-  namespace: flux-system
+  namespace: &namespace kube-system
 spec:
-  targetNamespace: kube-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  interval: 30m
   dependsOn:
     - name: cilium
+      namespace: *namespace
   path: ./kubernetes/apps/kube-system/cilium/config
-  prune: false # never should be deleted
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  wait: false
-  interval: 30m
-  timeout: 5m
+  targetNamespace: *namespace
+  wait: true

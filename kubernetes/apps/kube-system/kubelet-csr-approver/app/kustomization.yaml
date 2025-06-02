@@ -1,11 +1,13 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: kube-system
 resources:
-  - ./helmrelease.yaml
+  - ./helm-release.yaml
 configMapGenerator:
-  - name: kubelet-csr-approver-helm-values
+  - name: kubelet-csr-approver-values
     files:
-      - values.yaml=./helm-values.yaml
+      - values.yaml=./values.yaml
 configurations:
   - kustomizeconfig.yaml

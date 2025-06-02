@@ -1,0 +1,31 @@
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "default-public-certificate"
+spec:
+  dnsNames:
+    - "${PUBLIC_DOMAIN}"
+    - "*.${PUBLIC_DOMAIN}"
+    - "*.ostroda.${PUBLIC_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+    group: cert-manager.io
+  secretName: "default-public-certificate"
+---
+# yaml-language-server: $schema=https://crd.movishell.pl/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "default-private-certificate"
+spec:
+  dnsNames:
+    - "${PRIVATE_DOMAIN}"
+    - "*.${PRIVATE_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+    group: cert-manager.io
+  secretName: "default-private-certificate"

@@ -1,31 +1,45 @@
 [env]
+# Configuration oold @todo: Cleanup this file
 _.python.venv = { path = "{{config_root}}/.venv", create = true }
-KUBECONFIG = "{{config_root}}/kubeconfig"
-SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
-TALOSCONFIG = "{{config_root}}/talos/clusterconfig/talosconfig"
+
+# Included file paths
+_.file = [
+  "{{config_root}}/onepassword.env",
+  "{{config_root}}/kubernetes/apps/system-upgrade/versions.env"
+]
 BOOTSTRAP_DIR = "{{config_root}}/bootstrap"
 KUBERNETES_DIR = "{{config_root}}/kubernetes"
 ROOT_DIR = "{{config_root}}"
 SCRIPTS_DIR = "{{config_root}}/scripts"
 TALOS_DIR = "{{config_root}}/talos"
 
+# File paths
+# {{config_root}} Default: $HOME - # Mise Specific This is the root directory for all configuration files https://mise.jdx.dev/configuration.html#mise-global-config-root
+TALOSCONFIG = "{{config_root}}/.config/talos/clusterconfig/talosconfig"
+KUBECONFIG = "{{config_root}}/.config/kubernetes/kubeconfig"
+SOPS_AGE_KEY_FILE = "{{config_root}}/.config/sops/age.key"
+MINIJINJA_CONFIG_FILE = "{{config_root}}/.minijinja.toml"
+
+ANSIBLE_HOST_KEY_CHECKING = "False"
+
 [tools]
 "python" = "3.13"
+"pre-commit" = "4.2.0"
 "pipx:makejinja" = "2.7.2"
-"aqua:budimanjojo/talhelper" = "3.0.23"
+"aqua:budimanjojo/talhelper" = "3.0.28"
 "aqua:cilium/cilium-cli" = "0.18.3"
-"aqua:cli/cli" = "2.72.0"
-"aqua:cloudflare/cloudflared" = "2025.4.2"
-"aqua:cue-lang/cue" = "0.12.1"
+"aqua:cli/cli" = "2.74.0"
+"aqua:cloudflare/cloudflared" = "2025.5.0"
+"aqua:cue-lang/cue" = "0.13.0"
 "aqua:FiloSottile/age" = "1.2.1"
-"aqua:fluxcd/flux2" = "2.5.1"
+"aqua:fluxcd/flux2" = "2.6.0"
 "aqua:getsops/sops" = "3.10.2"
 "aqua:go-task/task" = "3.43.3"
-"aqua:helm/helm" = "3.17.3"
-"aqua:helmfile/helmfile" = "1.0.0"
+"aqua:helm/helm" = "3.18.1"
+"aqua:helmfile/helmfile" = "1.1.1"
 "aqua:jqlang/jq" = "1.7.1"
 "aqua:kubernetes-sigs/kustomize" = "5.6.0"
-"aqua:kubernetes/kubectl" = "1.33.0"
-"aqua:mikefarah/yq" = "4.45.2"
-"aqua:siderolabs/talos" = "1.10.2"
-"aqua:yannh/kubeconform" = "0.6.7"
+"aqua:kubernetes/kubectl" = "1.33.1"
+"aqua:mikefarah/yq" = "4.45.4"
+"aqua:siderolabs/talos" = "1.10.3"
+"aqua:yannh/kubeconform" = "0.7.0"
