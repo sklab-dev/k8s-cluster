@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/stirling-tools/s-pdf
-              tag: 0.44.0-fat@sha256:4593d9fa5ed99710772fea6642473f75de7d71f89cb32bd8e52f5b1001cb0ccc
+              tag: 1.1.0-fat@sha256:5a345c7397ff6c788056ba51aa82ea642f8b95cfb8a71e482598fe422c50a78d
               pullPolicy: IfNotPresent
             env:
               TZ: ${CONFIG_TIMEZONE}
